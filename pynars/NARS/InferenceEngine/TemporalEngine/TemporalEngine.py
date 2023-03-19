@@ -1,3 +1,54 @@
+'''
+这个文件是PyNARS中的一个模块，实现了时间推理引擎。时间推理引擎是NARS系统中的一个重要组成部分，用于处理时间相关的推理任务。本模块实现了时间推理引擎的主要功能，包括匹配规则、推理、添加事件等。下面是详细的注释：
+
+包依赖关系：
+    pynars.NAL.Functions.Tools
+    pynars.NARS.DataStructures._py.Buffer
+    pynars.NARS.DataStructures._py.Link
+    pynars.NARS.RuleMap.add_rule
+    pynars.Narsese._py.Budget
+    pynars.Narsese._py.Connector
+    pynars.Narsese._py.Copula
+    pynars.Narsese._py.Evidence
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Term
+    pynars.NARS
+    pynars.NAL.Inference
+    pynars.Config
+    pynars.Global
+    pynars.NAL.Inference
+    pathlib.Path
+
+全局变量名称及其作用：
+    rule_map: 用于存储规则的RuleMap对象。
+    
+各函数的依赖关系和主要功能：
+    match: 
+        依赖：match_rule
+        功能：验证两个事件是否可以相互作用。
+    match_rule: 
+        依赖：无
+        功能：给定两个事件，找到匹配的规则进行一步推理。
+    inference: 
+        依赖：无
+        功能：根据规则进行推理。
+    step: 
+        依赖：step_with_sequence, step_with_operations, add_event, add_operation_feedback
+        功能：执行一步推理。
+    step_with_sequence: 
+        依赖：match, inference
+        功能：使用self.sequence_buffer进行推理。
+    step_with_operations: 
+        依赖：无
+        功能：使用self.operations_buffer进行推理。
+    add_event: 
+        依赖：无
+        功能：将事件添加到self.sequence_buffer和self.operations_buffer中。
+    add_operation_feedback: 
+        依赖：无
+        功能：将操作事件添加到self.operations_buffer中。
+'''
+
 from copy import copy
 from typing import Union
 

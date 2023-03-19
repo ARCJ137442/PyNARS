@@ -1,3 +1,58 @@
+'''
+这个文件是PyNARS中的一个模块，实现了NARS中的记忆模块。它包含了一个Memory类，用于存储和处理NARS中的概念和任务。Memory类的主要功能是接受任务，将任务与概念相关联，并尝试解决任务。Memory类还包含了一些辅助函数，用于处理任务和概念之间的关系。
+
+包依赖关系：
+    pynars.Config
+    pynars.NAL.Inference.LocalRules
+    pynars.NAL.MetaLevelInference.VariableSubstitution
+    pynars.NARS.DataStructures._py.Link
+    pynars.Narsese._py.Sentence
+    pynars.Narsese
+    pynars.Narsese._py.Task
+    pynars.NAL.Functions.Tools
+    pynars.NAL.Inference
+    pynars.NARS.DataStructures._py.Concept
+    pynars.NARS.DataStructures._py.Bag
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    __init__:
+        依赖：pynars.NARS.DataStructures._py.Concept, pynars.NARS.DataStructures._py.Bag
+        功能：初始化Memory类的实例。
+    accept:
+        依赖：_accept_judgement, _accept_goal, _accept_question, _accept_quest, pynars.Config.Enable
+        功能：接受一个任务，将任务与概念相关联，并尝试解决任务。
+    _accept_judgement:
+        依赖：pynars.NAL.Functions.Tools.revisible, pynars.NAL.Inference.local__revision
+        功能：处理一个判断任务。
+    _accept_question:
+        依赖：_solve_query, _solve_question, pynars.NARS.DataStructures._py.Concept.question_table
+        功能：处理一个问题任务。
+    _accept_goal:
+        依赖：pynars.NAL.Functions.Tools.revisible, pynars.NAL.Inference.local__revision
+        功能：处理一个目标任务。
+    _accept_quest:
+        依赖：_solve_query, pynars.NARS.DataStructures._py.Concept.quest_table
+        功能：处理一个寻求任务。
+    _solve_judgement:
+        依赖：pynars.NAL.Functions.Tools.revisible, pynars.NAL.Inference.local__revision, pynars.NAL.Inference.LocalRules.solution_question, pynars.NARS.DataStructures._py.Concept.question_table
+        功能：尝试解决一个判断任务。
+    _solve_question:
+        依赖：pynars.NARS.DataStructures._py.Concept.match_belief, pynars.NAL.Inference.LocalRules.solution_question
+        功能：尝试解决一个问题任务。
+    _solve_query:
+        依赖：pynars.NARS.DataStructures._py.Concept.take_by_key, pynars.NAL.MetaLevelInference.VariableSubstitution.unification__var_const, pynars.NAL.Inference.LocalRules.solution_query
+        功能：尝试解决一个查询任务。
+    _solve_goal:
+        依赖：pynars.NAL.Functions.Tools.revisible, pynars.NAL.Inference.local__revision
+        功能：尝试解决一个目标任务。
+    _solve_quest:
+        依赖：pynars.NARS.DataStructures._py.Concept.match_belief, pynars.NAL.Inference.LocalRules.solution_question
+        功能：尝试解决一个寻求任务。
+'''
+
 from pynars.Config import Enable
 from pynars.NAL.Inference.LocalRules import solve_query, solution_query, solution_question
 from pynars.NAL.MetaLevelInference.VariableSubstitution import unification__var_const

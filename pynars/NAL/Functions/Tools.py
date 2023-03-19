@@ -1,3 +1,36 @@
+'''
+Tools.py
+这个文件包含了一些工具函数，用于处理NARS系统中的一些常见操作，例如将Truth转换为Quality，将Budget分配给多个链接等等。
+
+## 导入模块路径列表
+- typing
+- pynars.Global
+- pynars.Config
+- pynars.NAL.Functions.TemporalFunctions
+- pynars.Narsese
+- copy
+- math
+
+## 全局变量名称及其作用
+- 无
+
+## 各函数的依赖关系和主要功能
+- truth_to_quality(truth: Truth) -> float
+    - 将Truth转换为Quality
+- distribute_budget_among_links(budget: Budget, n_links: int) -> Budget
+    - 将Budget分配给多个链接
+- project_truth(premise1: Union[Judgement, Goal, Question, Quest], premise2: Union[Judgement, Goal]) -> Truth
+    - 将premise2的Truth投影到premise1的时间上
+- calculate_solution_quality(s_in: Sentence, s_solution: Sentence, rate_by_confidence: bool=True) -> float
+    - 计算解决问题的句子的Quality
+- revisible(task: Task, belief: Task) -> bool
+    - 检查两个句子是否可以用于修订
+- truth_from_term(term: Term) -> Truth
+    - 将Term转换为Truth
+- truth_to_term(truth: Truth) -> Term
+    - 将Truth转换为Term
+'''
+
 # from ...Narsese import Compound
 
 # def compound_remove_components

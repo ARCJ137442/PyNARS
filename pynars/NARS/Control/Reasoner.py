@@ -1,3 +1,56 @@
+'''
+Reasoner.py
+
+包依赖关系：
+    os
+    pynars.NAL.Functions.Tools
+    pynars.NARS.DataStructures._py.Channel
+    pynars.NARS.DataStructures._py.Link
+    pynars.NARS.InferenceEngine
+    pynars.Narsese._py.Budget
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Task
+    pynars.Config
+    pynars.Config.Enable
+    typing
+    pynars.NARS.Operation
+    pynars.Global
+    pynars.NARS.DataStructures
+    pynars.NARS.DataStructures.Bag
+    pynars.NARS.DataStructures.Memory
+    pynars.NARS.DataStructures.NarseseChannel
+    pynars.NARS.DataStructures.Buffer
+    pynars.NARS.DataStructures.Task
+    pynars.NARS.DataStructures.Concept
+    pynars.InferenceEngine.GeneralEngine
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    __init__:
+        依赖：Config.load, GeneralEngine, TemporalEngine, Memory, Buffer, NarseseChannel, Channel, List
+        功能：初始化Reasoner类
+    reset:
+        依赖：无
+        功能：重置Reasoner类
+    cycles:
+        依赖：cycle
+        功能：执行多个cycle
+    input_narsese:
+        依赖：cycle
+        功能：将narsese输入到Reasoner中
+    cycle:
+        依赖：Memory.accept, TemporalEngine.step, GeneralEngine.step, Operation.execute, Operation.aware__believe, Operation.aware__wonder, Operation.aware__evaluate
+        功能：执行一个cycle
+    mental_operation:
+        依赖：Operation.execute, Operation.aware__believe, Operation.aware__wonder, Operation.aware__evaluate
+        功能：处理NAL-9中的mental operation
+    register_operation:
+        依赖：Operation.register
+        功能：注册operation
+'''
+
 from os import remove
 from pynars.NAL.Functions.Tools import truth_to_quality
 from pynars.NARS.DataStructures._py.Channel import Channel
@@ -17,8 +70,18 @@ import pynars.NARS.Operation as Operation
 from pynars import Global
 
 class Reasoner:
-
     def __init__(self, n_memory, capacity, config='./config.json') -> None:
+        """
+        Initializes the Reasoner class.
+        
+        Args:
+            n_memory (int): The number of memories to be used.
+            capacity (int): The capacity of the buffers.
+            config (str): The path to the configuration file.
+        
+        Returns:
+            None
+        """
         # print('''Init...''')
         Config.load(config)
         
@@ -53,7 +116,11 @@ class Reasoner:
         return success, task, task_overflow
 
     def cycle(self):
+        """
         '''Everything to do by NARS in a single working cycle'''
+        This function cycles through the channels, internal experience, and overall experience buffers, and processes a task from the overall experience buffer. It also applies general inference steps, temporal induction, and mental operations. Finally, it handles the sense of time and returns the tasks derived, judgement revised, goal revised, answers to questions, and answers to quests. 
+        这个函数循环遍历通道、内部经验和整体经验缓冲区，并从整体经验缓冲区处理任务。它还应用一般推理步骤、时间归纳和心理操作。最后，它处理时间感，并返回派生的任务、修订的判断、修订的目标、问题的答案和任务的答案。
+        """
 
         # step 1. Take out an Item from `Channels`, and then put it into the `Overall Experience`
         for channel in self.channels:

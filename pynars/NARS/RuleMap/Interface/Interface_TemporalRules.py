@@ -1,3 +1,102 @@
+'''
+这个文件包含了一些用于时间推理的规则，包括序列、并行、类比、归纳等。这些规则可以用于NARS系统中的时间推理，以及其他需要时间推理的应用中。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    pynars.Narsese
+    pynars.NAL.Inference
+    pynars.NAL.Theorems
+    pynars.Global
+    pynars.Narsese._py.Copula
+    pynars.Narsese._py.Term
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    _temporal__deduction_sequence_eliminate__0:
+        依赖：temporal__deduction_sequence_eliminate
+        功能：将一个时间推理任务中的序列消解为单个语句。
+    _temporal__deduction_sequence_eliminate__0_prime:
+        依赖：temporal__deduction_sequence_eliminate
+        功能：将一个时间推理任务中的序列消解为单个语句。
+    _temporal__abduction__1:
+        依赖：temporal__abduction
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__abduction__1_prime:
+        依赖：temporal__abduction
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__deduction_sequence_replace__0_1:
+        依赖：temporal__deduction_sequence_replace
+        功能：将一个时间推理任务中的序列替换为单个语句。
+    _temporal__deduction_sequence_replace__1_0:
+        依赖：temporal__deduction_sequence_replace
+        功能：将一个时间推理任务中的序列替换为单个语句。
+    _temporal__sequence_immediate:
+        依赖：temporal__sequence_immediate
+        功能：将一个时间推理任务中的立即序列转化为单个语句。
+    _temporal__sequence:
+        依赖：temporal__sequence
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__sequence_prime:
+        依赖：temporal__sequence
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__parallel_immediate:
+        依赖：temporal__parallel_immediate
+        功能：将一个时间推理任务中的立即并行转化为单个语句。
+    _temporal__parallel:
+        依赖：temporal__parallel
+        功能：将一个时间推理任务中的并行转化为单个语句。
+    _temporal__analogy__0_1:
+        依赖：temporal__analogy
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__analogy__1_0:
+        依赖：temporal__analogy
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__analogy__0_0:
+        依赖：temporal__analogy
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__analogy__1_1:
+        依赖：temporal__analogy
+        功能：将一个时间推理任务中的类比转化为推理。
+    _temporal__induction_implication:
+        依赖：temporal__induction_implication
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_implication_prime:
+        依赖：temporal__induction_implication
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_equivalence:
+        依赖：temporal__induction_equivalence
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_composition:
+        依赖：temporal__induction_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_predictieve_implication_composition:
+        依赖：temporal__induction_predictieve_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_predictive_implication_composition_prime:
+        依赖：temporal__induction_predictive_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_predictive_implication_composition_inverse:
+        依赖：temporal__induction_predictive_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_predictive_implication_composition_inverse_prime:
+        依赖：temporal__induction_predictive_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+各函数的依赖关系和主要功能：
+    _temporal__induction_retrospective_implication_composition:
+        依赖：temporal__induction_retrospective_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_retrospective_implication_composition_prime:
+        依赖：temporal__induction_retrospective_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_retrospective_implication_composition_inverse:
+        依赖：temporal__induction_retrospective_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+    _temporal__induction_retrospective_implication_composition_inverse_prime:
+        依赖：temporal__induction_retrospective_implication_composition
+        功能：将一个时间推理任务中的序列转化为单个语句。
+'''
 from pynars.NARS.DataStructures import Link, TaskLink, TermLink, LinkType, Task
 from pynars.Narsese import Belief
 from pynars.NAL.Inference import *

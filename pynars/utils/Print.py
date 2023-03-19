@@ -1,3 +1,24 @@
+'''
+这个文件是Print.py，它定义了一个PrintType枚举类和一些输出函数，用于在控制台中输出不同类型的信息。
+
+包依赖关系：
+    sty
+
+全局变量名称及其作用：
+    PrintType: 枚举类，定义了不同类型的输出信息。
+    show_budget: 布尔值，表示是否显示预算信息。
+
+各函数的依赖关系和主要功能：
+    print_filename:
+        依赖：无
+        功能：输出文件名。
+
+    out_print:
+        依赖：无
+        功能：输出不同类型的信息，包括预算信息、注释信息、普通信息等。
+
+'''
+
 from enum import Enum
 from sty import bg, fg, ef, rs
 

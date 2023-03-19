@@ -1,3 +1,21 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了NAL5的推理规则。NAL5是NARS的一个版本，它是一个基于逻辑的推理系统，能够处理不确定性和不完整性的知识。NAL5的推理规则包括了syllogystic rules、compositional rules和resemblance rules。这个模块实现了NAL5的syllogystic rules和compositional rules。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    sparse_lut
+    pynars.Global
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL5:
+        依赖：pynars.NARS.DataStructures, sparse_lut, pynars.Global, ....RuleMap.add_rule
+        功能：实现NAL5的syllogystic rules和compositional rules
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from sparse_lut import SparseLUT

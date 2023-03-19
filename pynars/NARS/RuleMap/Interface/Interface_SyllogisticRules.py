@@ -1,3 +1,80 @@
+'''
+这个文件包含了用于处理三段论的接口函数。这些函数可以用于推理、类比、归纳、演绎、比较和类比推理。这些函数都是在syllogistic.py中定义的，但是这个文件提供了一些额外的功能，例如在不同的前提顺序下进行推理。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    pynars.Narsese
+    pynars.NAL.Inference
+    pynars.NAL.Theorems
+    pynars.Global
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    _syllogistic__deduction__0_1:
+        依赖：syllogistic__deduction
+        功能：{<M-->P>, <S-->M>} |- <S-->P>
+    _syllogistic__deduction__1_0:
+        依赖：syllogistic__deduction
+        功能：{<S-->M>, <M-->P>} |- <S-->P>
+    _syllogistic__exemplification__0_1:
+        依赖：syllogistic__exemplification
+        功能：{<M-->S>, <P-->M>} |- <S-->P>
+    _syllogistic__exemplification__1_0:
+        依赖：syllogistic__exemplification
+        功能：{<P-->M>, <M-->S>} |- <S-->P>
+    _syllogistic__induction__0_0:
+        依赖：syllogistic__induction
+        功能：归纳推理
+    _syllogistic__induction__0_0_prime:
+        依赖：syllogistic__induction
+        功能：归纳推理
+    _syllogistic__abduction__1_1:
+        依赖：syllogistic__abduction
+        功能：类比推理
+    _syllogistic__comparison__0_0:
+        依赖：syllogistic__comparison
+        功能：{<M-->P>, <S-->P>} |- <S-->M>
+    _syllogistic__comparison__0_0_prime:
+        依赖：syllogistic__comparison
+        功能：{<M-->P>, <S-->P>} |- <M-->S>
+    _syllogistic__comparison__1_1:
+        依赖：syllogistic__comparison
+        功能：{<M-->P>, <S-->M>} |- <S-->P>
+    _syllogistic__comparison__1_1_prime:
+        依赖：syllogistic__comparison
+        功能：{<M-->P>, <S-->M>} |- <P-->S>
+    _syllogistic__analogy__0_1:
+        依赖：syllogistic__analogy
+        功能：{<M-->P>, <S-->M>} |- <S-->P>
+    _syllogistic__analogy__1_0:
+        依赖：syllogistic__analogy
+        功能：{<M-->P>, <M-->S>} |- <S-->P>
+各函数的依赖关系和主要功能：
+    _syllogistic__analogy__0_0:
+        依赖：syllogistic__analogy
+        功能：{<M-->P>, <S-->M>} |- <M-->S>
+    _syllogistic__analogy__1_1:
+        依赖：syllogistic__analogy
+        功能：{<M-->P>, <S-->M>} |- <P-->S>
+    _syllogistic__resemblance__0_1:
+        依赖：syllogistic__resemblance
+        功能：{<M-->P>, <S-->M>} |- <S-->P>
+    _syllogistic__resemblance__1_0:
+        依赖：syllogistic__resemblance
+        功能：{<M-->P>, <M-->S>} |- <S-->P>
+    _syllogistic__resemblance__0_0_prime:
+        依赖：syllogistic__resemblance
+        功能：{<P-->M>, <S-->M>} |- <S-->P>
+    _syllogistic__resemblance__1_1_prime:
+        依赖：syllogistic__resemblance
+        功能：{<P-->M>, <M-->S>} |- <P-->S>
+    _syllogistic__reversion:
+        依赖：无
+        功能：反演推理
+'''
+
 from pynars.NARS.DataStructures import Link, TaskLink, TermLink, LinkType, Task
 from pynars.Narsese import Belief
 from pynars.NAL.Inference import *

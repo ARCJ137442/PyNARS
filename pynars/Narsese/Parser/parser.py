@@ -1,3 +1,82 @@
+'''
+这个文件是Narsese语言的解析器，用于将Narsese语言的文本转换为Python对象。它包含了一个LarkParser类，用于解析Narsese语言的文本，以及一个TreeToNarsese类，用于将解析后的语法树转换为Python对象。此外，它还包含了一些全局变量和函数，用于配置解析器和实现解析过程中的一些功能。
+
+包依赖关系：
+    pathlib.Path
+    datetime.datetime
+    pynars.Config
+    pynars.Global
+    pynars.Narsese.Term
+    pynars.Narsese.Judgement
+    pynars.Narsese.Tense
+    pynars.Narsese.Statement
+    pynars.Narsese.Copula
+    pynars.Narsese.Truth
+    pynars.Narsese.Stamp
+    pynars.Narsese.Interval
+    pynars.Narsese.Base
+    pynars.Narsese.Operation
+    pynars.Narsese.Budget
+    pynars.Narsese.Task
+    pynars.Narsese.Goal
+    pynars.Narsese.Punctuation
+    pynars.Narsese.Question
+    pynars.Narsese.Quest
+    pynars.Narsese.Sentence
+    pynars.Narsese.VarPrefix
+    pynars.Narsese.Variable
+    pynars.Narsese.Connector
+    pynars.Narsese.Compound
+    pynars.Narsese.SELF
+
+全局变量名称及其作用：
+    root_path: 当前文件所在目录的路径
+    narsese_path: Narsese语言的Lark语法文件的路径
+    narsese_py_path: Narsese语言的Lark语法文件生成的Python文件的路径
+    mtime_lark: Narsese语言的Lark语法文件的最后修改时间
+    mtime_py: Narsese语言的Lark语法文件生成的Python文件的最后修改时间
+
+各函数的依赖关系和主要功能：
+    LarkParser:
+        依赖：Lark_StandAlone, TreeToNarsese
+        功能：Narsese语言的解析器，用于将Narsese语言的文本转换为Python对象。
+    TreeToNarsese:
+        依赖：pynars.Narsese, pynars.Config, pynars.Global
+        功能：将解析后的语法树转换为Python对象。
+    task:
+        依赖：Sentence, Budget, Judgement, Question, Quest, Goal
+        功能：将语法树中的任务转换为Task对象。
+    judgement:
+        依赖：Statement, Truth, Tense, Base, Stamp
+        功能：将语法树中的判断转换为Judgement对象。
+    question:
+        依赖：Statement, Tense, Base, Stamp
+        功能：将语法树中的问题转换为Question对象。
+    quest:
+        依赖：Statement, Tense, Base, Stamp
+        功能：将语法树中的任务转换为Quest对象。
+    goal:
+        依赖：Statement, Truth, Tense, Base, Stamp
+        功能：将语法树中的任务转换为Goal对象。
+    statement:
+        依赖：Term, Copula
+        功能：将语法树中的语句转换为Statement对象。
+    truth:
+        依赖：Token
+        功能：将语法树中的truth转换为元组。
+    budget:
+        依赖：Token
+        功能：将语法树中的budget转换为元组。
+    atom_term:
+        依赖：Token
+        功能：将语法树中的原子term转换为Term对象。
+    op:
+        依赖：Token
+        功能：将语法树中的操作符转换为Operation对象。
+    interval:
+        依赖：Token
+        功能：将语法树中的interval转换为Interval对象。
+'''
 from pynars.Narsese import Term, Judgement, Tense, Statement, Copula, Truth, Stamp, Interval
 from pynars.Narsese import Base, Operation, Budget, Task, Goal, Punctuation, Question, Quest, Sentence, VarPrefix, Variable, Connector, Compound, SELF
 from pathlib import Path

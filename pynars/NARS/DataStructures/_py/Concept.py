@@ -1,3 +1,95 @@
+'''
+这个文件是PyNARS中的Concept.py，它定义了Concept类，表示NARS中的概念。Concept是NARS中的一个重要概念，它是对NARS中的Term进行封装，同时还包含了一些与Term相关的信息，如TaskLink、TermLink等。本文件中的Concept类继承自Item类，是NARS中的一个重要的数据结构。
+
+包依赖关系：
+    typing.Tuple
+    typing.Type
+    typing.List
+    typing.Union
+    pynars.NAL.Functions.Tools.calculate_solution_quality
+    pynars.NAL.Functions.Tools.distribute_budget_among_links
+    pynars.NAL.Functions.BudgetFunctions.Budget_merge
+    pynars.Narsese.Belief
+    pynars.Narsese.Task
+    pynars.Narsese.Item
+    pynars.Narsese.Budget
+    pynars.Narsese.Sentence
+    pynars.Narsese.Term
+    pynars.Narsese.Judgement
+    pynars.Narsese.Goal
+    pynars.Narsese.place_holder
+    pynars.Narsese._py.Quest
+    pynars.Narsese._py.Question
+    pynars.Config.Config
+    pynars.Config.Enable
+    pynars.Narsese.place_holder
+    pynars.Narsese._py.Sentence.Quest
+    pynars.Narsese._py.Sentence.Question
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Link.Link
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Link.TermLink
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Link.TaskLink
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Link.LinkType
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Table.Table
+    pynars.NARS.PyNARS.pynars.NARS.DataStructures._py.Bag.Bag
+    
+全局变量名称及其作用：
+    term_links: Bag
+        一个Bag，用于存储TermLink，表示与该概念相关的TermLink
+    question_table: Table
+        一个Table，用于存储直接询问该概念的Pending Question
+    quest_table: Table
+        一个Table，用于存储直接询问该概念的Pending Quest
+    executable_preconditions: Table
+        一个Table，用于存储该概念的可执行前提
+    belief_table: Table
+        一个Table，用于存储直接与该概念相关的Judgment
+    general_executable_preconditions: Table
+        一个Table，用于存储该概念的一般可执行前提
+    desire_table: Table
+        一个Table，用于存储直接与该概念相关的Goal
+    termLinkTemplates: List[TermLink]
+        一个List，用于存储TermLink模板，只有在具有CompoundTerm的概念中才使用，以提高TermLink构建的效率
+    _subterms: List[Term]
+        一个List，用于存储该概念的子Term
+
+各函数的依赖关系和主要功能：
+    __init__:
+        依赖：pynars.Config
+        功能：初始化Concept实例
+    get_belief:
+        依赖：无
+        功能：获取概念的信念
+    match_belief:
+        依赖：calculate_solution_quality
+        功能：在概念的信念表中匹配一个与给定句子最匹配的信念
+    match_desire:
+        依赖：calculate_solution_quality
+        功能：在概念的愿望表中匹配一个与给定目标最匹配的愿望
+    add_belief:
+        依赖：无
+        功能：向概念的信念表中添加一个信念
+    add_desire:
+        依赖：无
+        功能：向概念的愿望表中添加一个愿望
+    accept:
+        依赖：_build_task_links, _build_term_links, Concept._conceptualize
+        功能：接受一个任务，构建任务链接和项链接
+    _build_task_links:
+        依赖：Concept._conceptualize
+        功能：构建任务链接
+    _build_term_links:
+        依赖：Concept._conceptualize
+    _insert_task_link:
+        依赖：无
+        功能：将一个任务链接插入到任务链接袋中
+    _insert_term_link:
+        依赖：无
+        功能：将一个项链接插入到项链接袋中
+    _conceptualize:
+        依赖：pynars.Config, pynars.NAL.Functions.BudgetFunctions.Budget_merge, .Concept, .Link.TermLink, .Link.TaskLink, pynars.Narsese.Term, pynars.Narsese.Budget
+        功能：将一个任务概念化，如果概念已经存在于内存中，则将概念合并到已存在的概念中。否则，创建一个新的概念并将其添加到内存中。
+'''
+
 from typing import Tuple, Type, List, Union
 from pynars.NAL.Functions.Tools import calculate_solution_quality, distribute_budget_among_links
 from pynars.NAL.Functions.BudgetFunctions import Budget_merge

@@ -1,3 +1,43 @@
+'''
+这个模块包含了一些意识操作的函数，如Believe、Want、Evaluate和Wonder。这些函数会将一个语句转化为一个任务，其中任务的预算会被设置为一个新的预算，该预算的优先级和耐久性都会被降低，以反映出任务的内部性质。这个模块还包含了一个函数_aware，它是Believe、Want、Evaluate和Wonder的基础函数，用于将语句转化为任务。
+
+包依赖关系：
+    pynars.Config
+    pynars.Narsese._py
+    pynars.Narsese._py.Budget
+    pynars.Narsese._py.Compound
+    pynars.Narsese._py.Connector
+    pynars.Narsese._py.Operation
+    pynars.Narsese._py.Sentence
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Task
+    pynars.Narsese._py.Truth
+    pynars.Narsese.Term
+    pynars.Global
+    ._register
+    ..Functions.Tools
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    _aware:
+        依赖：copy
+        功能：将语句转化为任务
+    believe:
+        依赖：_aware
+        功能：将一个Judgement转化为一个Belief任务
+    want:
+        依赖：_aware
+        功能：将一个Goal转化为一个Belief任务
+    evaluate:
+        依赖：_aware
+        功能：将一个Quest转化为一个Evaluate任务
+    wonder:
+        依赖：_aware
+        功能：将一个Question转化为一个Wonder任务
+'''
+
 from copy import copy
 from typing import List
 from pynars.Config import Config

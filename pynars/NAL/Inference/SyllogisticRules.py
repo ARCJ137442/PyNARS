@@ -1,6 +1,39 @@
 '''
 First-order syllogism & higher-order syllogism
 
+简介：
+    本文件实现了一些一阶和高阶三段论规则，包括强三段论、类比、相似、弱三段论、归纳、举例。这些规则可以用于NARS系统中的推理过程。
+
+导入模块路径列表：
+    - math
+    - pynars.NAL.Functions.DesireValueFunctions
+    - pynars.NAL.Functions.TruthValueFunctions
+    - pynars.NAL.Functions.BudgetFunctions
+    - pynars.Narsese
+    - pynars.Narsese.Punctuation
+    - pynars.Narsese.Sentence
+    - pynars.Narsese.Judgement
+    - pynars.Narsese.Goal
+    - pynars.Narsese.Question
+    - pynars.Narsese.Quest
+    - pynars.NAL.Functions
+    - copy
+    - pynars.NAL.Functions.StampFunctions
+
+全局变量名称及其作用：
+    - 无
+
+各函数的依赖关系和主要功能：
+    - deduction: 实现了强三段论规则，包括一阶和高阶。函数的输入为一个任务和一个信念，输出为一个新的任务，其中新任务的语句为强三段论的结论，真值为两个前提的真值的逻辑和。
+    - analogy: 实现了类比规则，包括一阶和高阶。函数的输入为一个任务和一个信念，输出为一个新的任务，其中新任务的语句为类比的结论，真值为两个前提的真值的逻辑和。
+    - resemblance: 实现了相似规则，包括一阶和高阶。函数的输入为一个任务和一个信念，输出为一个新的任务，其中新任务的语句为相似的结论，真值为两个前提的真值的逻辑和。
+    - abduction: 实现了拟合规则，包括一阶和高阶。函数的输入为一个任务和一个信念，输出为一个新的任务，其中新任务的语句为拟合的结论，真值为两个前提的真值的逻辑和。
+
+'''
+
+'''
+First-order syllogism & higher-order syllogism
+
 @ Author:   Bowen XU
 @ Contact:  bowen.xu@pku.edu.cn
 @ Update:   2021.11.6 

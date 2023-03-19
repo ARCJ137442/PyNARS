@@ -1,3 +1,21 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了NAL1规则的添加。NAL1是NARS的一种基本推理规则，它包括了四种基本的推理方式：演绎、归纳、类比和拓展。这个模块中的函数用于向系统中添加NAL1规则。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    sparse_lut
+    pynars.Global
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL1:
+        依赖：Interface_SyllogisticRules._syllogistic__deduction__0_1, Interface_SyllogisticRules._syllogistic__deduction__1_0, Interface_SyllogisticRules._syllogistic__exemplification__0_1, Interface_SyllogisticRules._syllogistic__exemplification__1_0, Interface_SyllogisticRules._syllogistic__induction__0_0, Interface_SyllogisticRules._syllogistic__induction__0_0_prime, Interface_SyllogisticRules._syllogistic__abduction__1_1, Interface_SyllogisticRules._syllogistic__abduction__1_1_prime, Interface_SyllogisticRules._syllogistic__reversion, LinkType, TaskLink, TermLink, SparseLUT, OrderedDict, Copula, CommonId, add_rule
+        功能：向系统中添加NAL1规则
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from sparse_lut import SparseLUT

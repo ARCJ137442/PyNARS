@@ -1,4 +1,36 @@
 '''
+该文件实现了条件演绎规则，包括：
+- 演绎
+- 类比
+- 比较
+- 归纳
+- 演绎复合消除
+- 归纳复合组合
+- 演绎复合替换
+- 归纳复合替换
+- 类比复合替换
+- 演绎复合消除2
+
+导入模块路径列表：
+    - pynars.Narsese
+    - pynars.NAL.Inference.Functions
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    - deduction: 演绎
+    - abduction: 归纳
+    - induction: 比较
+    - analogy: 类比
+    - comparison: 归纳
+    - deduction_compound_eliminate: 演绎复合消除
+    - deduction_compound_replace: 演绎复合替换
+    - abduction_compound_eliminate: 归纳复合消除
+    - abduction_compound_eliminate2: 演绎复合消除2
+'''
+
+'''
 Conditional syllogism
 
 @ Author:   Bowen XU

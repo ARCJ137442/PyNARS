@@ -1,3 +1,21 @@
+'''
+这个模块包含与NARS印章操作相关的函数。
+
+- 导入列表:
+    - Union
+    - Config
+    - Stamp
+    - deepcopy
+    - Connector
+    - Copula
+
+- 全局变量:
+    - _temporal_interval: 一个字典，将给定联结词或连接词的时间间隔映射到它的值。
+
+- 函数依赖关系和主要功能:
+    - Stamp_merge: 合并两个印章并返回结果。它接受两个印章作为输入，以及一个可选的顺序标记、一个布尔标志以反转印章的顺序和一个时间偏差。它返回一个新的印章，它是合并两个输入印章的结果。
+'''
+
 from typing import Union
 from pynars.Config import Config
 from pynars.Narsese import Stamp

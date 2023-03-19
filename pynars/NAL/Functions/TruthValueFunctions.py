@@ -1,4 +1,34 @@
+'''
+这个文件包含了一些用于处理NARS逻辑中真值的函数，包括本地推理和直接推理。其中本地推理是指只考虑两个命题之间的关系，而直接推理是指考虑多个命题之间的关系。这些函数的具体作用和依赖关系如下：
 
+导入模块路径列表：
+- typing.Callable
+- pynars.Narsese.Truth
+- pynars.Narsese.truth_analytic
+- .ExtendedBooleanFunctions
+- .UncertaintyMappingFunctions
+
+全局变量名称及其作用：
+- F_rev: 本地推理中的反转函数，将两个命题的正反面进行反转
+- F_exp: 本地推理中的期望函数，计算命题的期望值
+- F_dec: 本地推理中的决策函数，计算命题的决策值
+- F_neg: 直接推理中的否定函数，将命题的正反面进行反转
+- F_cnv: 直接推理中的转换函数，将命题的正面和置信度进行合并
+- F_cnt: 直接推理中的对偶函数，将命题的正面和负面进行对偶
+- F_ded: 直接推理中的演绎函数，计算两个命题的演绎结果
+- F_ana: 直接推理中的类比函数，计算两个命题的类比结果
+- F_res: 直接推理中的相似函数，计算两个命题的相似结果
+- F_abd: 直接推理中的引入函数，计算两个命题的引入结果
+- F_ind: 直接推理中的归纳函数，计算两个命题的归纳结果
+- F_exe: 直接推理中的举例函数，计算两个命题的举例结果
+- F_com: 直接推理中的比较函数，计算两个命题的比较结果
+- F_ddj: 直接推理中的析取消解函数，计算两个命题的析取消解结果
+- F_dcj: 直接推理中的合取消解函数，计算两个命题的合取消解结果
+- F_int: 术语组合中的交集函数，计算两个命题的交集结果
+- F_uni: 术语组合中的并集函数，计算两个命题的并集结果
+- F_dif: 术语组合中的差集函数，计算两个命题的差集结果
+
+'''
 from typing import Callable
 from pynars.Narsese import Truth, truth_analytic
 from .ExtendedBooleanFunctions import *

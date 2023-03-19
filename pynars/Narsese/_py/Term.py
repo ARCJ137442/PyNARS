@@ -1,3 +1,109 @@
+'''
+这个文件定义了一个名为Term的类，它是Narsese中的一个基本元素。Term类的实例可以是原子、语句或复合项。Term类的实例可以包含变量，可以是可执行的语句，可以是高阶的。Term类的实例可以被哈希，可以被比较，可以被克隆。Term类的实例可以被序列化，可以被打印。
+
+包依赖关系：
+    numpy
+    ordered_set
+    pynars.Config
+    pynars.Narsese._py.Connector
+    pynars.Narsese._py.Copula
+    typing
+    enum
+    pynars.utils.IndexVar
+
+全局变量名称及其作用：
+    place_holder: 一个占位符，用于哈希。
+
+各函数的依赖关系和主要功能：
+    Term.__init__:
+        依赖：无
+        功能：初始化Term类的实例，包括设置word、word_sorted、_components、_hash_value等属性。
+    Term.sub_terms:
+        依赖：无
+        功能：返回包括self和_components的所有Term类实例。
+    Term.components:
+        依赖：无
+        功能：返回_components属性，即包括self的所有Term类实例。
+    Term.count:
+        依赖：无
+        功能：返回包括self和_components的Term类实例的数量。
+    Term.complexity:
+        依赖：无
+        功能：返回self的复杂度。
+    Term.is_statement:
+        依赖：无
+        功能：判断self是否为语句。
+    Term.is_compound:
+        依赖：无
+        功能：判断self是否为复合项。
+    Term.is_atom:
+        依赖：无
+        功能：判断self是否为原子。
+    Term.is_commutative:
+        依赖：无
+        功能：判断self的组成部分是否可交换。
+    Term.is_higher_order:
+        依赖：无
+        功能：判断self是否为高阶项。
+    Term.is_executable:
+        依赖：无
+        功能：判断self是否为可执行语句。
+    Term.terms:
+        依赖：无
+        功能：返回包括self的所有Term类实例。
+    Term.index_var:
+        依赖：无
+        功能：返回self的IndexVar实例。
+    Term.is_mental_operation:
+        依赖：无
+        功能：判断self是否为心理操作。
+    Term.identical:
+        依赖：无
+        功能：判断self和o是否相同。
+    Term.equal:
+        依赖：无
+        功能：判断self和o是否相等。
+    Term.has_common:
+        依赖：无
+        功能：判断term是否与self有公共部分，如果same_term为True，则term与self相同时也返回True。
+    Term.__hash__:
+        依赖：无
+        功能：返回self的哈希值。
+    Term.__eq__:
+        依赖：Term.identical
+        功能：判断self和o是否相同。
+    Term.__contains__:
+        依赖：无
+        功能：判断term是否在self的子项中。
+    Term.__str__:
+        依赖：无
+        功能：返回self的字符串表示。
+    Term.__repr__:
+        依赖：无
+        功能：返回self的字符串表示，用于调试。
+    Term.__len__:
+        依赖：无
+        功能：返回self的子项数量。
+    Term.__getitem__:
+        依赖：无
+        功能：返回self的第一个子项。
+    Term.repr:
+        依赖：Term.repr_with_var
+        功能：返回self的字符串表示，如果self包含变量，则使用Term.repr_with_var。
+    Term.repr_with_var:
+        依赖：无
+        功能：返回self的字符串表示，包括变量。
+    Term.handle_variables:
+        依赖：无
+        功能：处理self的变量信息。
+    Term.handle_index_var:
+        依赖：Term.handle_variables
+        功能：处理self的IndexVar实例。
+    Term.clone:
+        依赖：无
+        功能：返回self的克隆。
+'''
+
 from pynars.Narsese._py.Connector import Connector
 from .Copula import Copula
 from pynars.Config import Enable

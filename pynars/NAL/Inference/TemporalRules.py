@@ -1,3 +1,56 @@
+'''
+TemporalRules.py
+这个文件包含了一些关于时间推理的规则，包括了时间推理的各种情况，如序列、并行、类比等。这些规则可以用于NARS系统中的时间推理。
+
+导入模块路径列表：
+- typing.Dict
+- typing.Tuple
+- pynars.Narsese.Task
+- pynars.Narsese.Belief
+- pynars.Narsese.Sentence
+- pynars.Narsese.Judgement
+- pynars.Narsese.Goal
+- pynars.Narsese.Question
+- pynars.Narsese.Quest
+- pynars.Narsese.Statement
+- pynars.Narsese.Term
+- pynars.Narsese.Compound
+- pynars.Narsese.Budget
+- pynars.Narsese.Stamp
+- pynars.Narsese.truth_analytic
+- pynars.Config.Enable
+- pynars.Narsese._py.Interval.Interval
+- pynars.Narsese._py.Terms.Terms
+- pynars.Narsese.Functions
+- copy.deepcopy
+
+全局变量名称及其作用：
+- 无
+
+各函数的依赖关系和主要功能：
+- deduction_sequence_eliminate: 
+    - 依赖关系：Stamp_merge, Truth_deduction, Budget_forward
+    - 主要功能：实现了序列消除规则
+- deduction_sequence_replace: 
+    - 依赖关系：Stamp_merge, Truth_deduction, Budget_forward
+    - 主要功能：实现了序列替换规则
+- abduction: 
+    - 依赖关系：Stamp_merge, Truth_abduction, Budget_forward
+    - 主要功能：实现了拟合规则
+- analogy: 
+    - 依赖关系：Stamp_merge, Truth_analogy, Desire_weak, Desire_strong, Budget_forward, Budget_backward_weak, Budget_backward
+    - 主要功能：实现了类比规则
+- sequence: 
+    - 依赖关系：Stamp_merge, Truth_deduction, Desire_deduction, Budget_forward
+    - 主要功能：实现了序列规则
+- sequence_immediate:
+    - 依赖关系：无
+    - 主要功能：实现了立即序列规则
+- parallel_immediate:
+    - 依赖关系：无
+    - 主要功能：实现了立即并行规则
+
+
 from typing import Dict, Tuple
 from pynars.Narsese import Task, Belief, Sentence, Judgement, Goal, Question, Quest
 from pynars.Narsese import Statement, Term, Compound

@@ -1,3 +1,106 @@
+'''
+这个文件是PyNARS中的通用推理引擎，实现了PyNARS中的通用推理算法。这个文件中的代码实现了通用推理引擎的各种规则，包括NAL1~NAL9的规则。这个文件中的代码实现了通用推理引擎的各种规则，包括NAL1~NAL9的规则。
+
+包依赖关系：
+    pathlib.Path
+    typing.Callable
+    typing.List
+    typing.Tuple
+    copy.copy
+    pynars.Global
+    pynars.NAL.Functions.Tools.project_truth
+    pynars.NAL.Functions.Tools.revisible
+    pynars.NAL.Inference.local__revision
+    pynars.Narsese._py.Budget.Budget
+    pynars.Narsese._py.Connector.Connector
+    pynars.Narsese._py.Copula.Copula
+    pynars.Narsese._py.Term.Term
+    pynars.Narsese._py.Term.Compound
+    pynars.Narsese._py.Term.Statement
+    pynars.Narsese._py.TermLink.TermLink
+    pynars.Narsese._py.TaskLink.TaskLink
+    pynars.NARS.DataStructures._py.Link.LinkType
+    pynars.NARS.DataStructures.Belief.Belief
+    pynars.NARS.DataStructures.Concept.Concept
+    pynars.NARS.DataStructures.Task.Task
+    pynars.NARS.RuleMap.RuleCallable.RuleCallable
+    pynars.NARS.RuleMap.RuleMap.RuleMap
+    pynars.NARS.RuleMap.add_rule._at
+    pynars.NARS.RuleMap.add_rule._common
+    pynars.NARS.RuleMap.add_rule._compound_at
+    pynars.NARS.RuleMap.add_rule._compound_has_common
+    pynars.NARS.RuleMap.add_rule.CommonId
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL1
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL1
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL2
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL3
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL4
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL5
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL6
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL7
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL8
+    pynars.NARS.RuleMap.add_rule.add_rules__NAL9
+
+变量名称及其作用：
+    rule_map: 通用推理引擎的规则映射表。
+    n_link_types: LinkType的最大值。
+    n_copula: Copula的数量。
+    n_has_common_id: 是否有共同ID。
+    n_match_reverse: 是否匹配反向。
+    n_common_id: 共同ID的数量。
+    n_compound_common_id: 复合共同ID的数量。
+    n_connector: Connector的数量。
+    n_sentence_type: 句子类型的数量。
+    n_has_compound_common_id: 是否有复合共同ID。
+    n_has_at: 是否有@。
+    n_has_compound_at: 是否有复合@。
+    n_the_other_compound_has_common: 另一个复合是否有共同ID。
+    n_the_other_compound_p1_at_p2: 另一个复合的P1是否@P2。
+    n_the_other_compound_p2_at_p1: 另一个复合的P2是否@P1。
+    n_is_belief_valid: 是否是有效的信念。
+    n_at_compound_pos: @的复合位置。
+    n_p1_at_p2: P1是否@P2。
+    n_p2_at_p1: P2是否@P1。
+
+各函数的依赖关系和主要功能：
+    GeneralEngine.match
+        依赖：extract_feature
+        功能：验证任务和信念是否可以相互作用，并返回匹配的规则。
+    GeneralEngine.match_rule
+        依赖：_compound_has_common, _compound_at, _at
+        功能：给定任务和信念，查找匹配的规则进行一步推理。
+    GeneralEngine.__init__
+        依赖：add_rules__NAL1, add_rules__NAL2, add_rules__NAL3, add_rules__NAL4, add_rules__NAL5, add_rules__NAL6, add_rules__NAL7, add_rules__NAL8, add_rules__NAL9
+        功能：初始化GeneralEngine对象。
+    GeneralEngine.build
+        依赖：无
+        功能：构建规则映射。
+    GeneralEngine.rule_map.verify
+        依赖：无
+        功能：验证规则映射。
+    GeneralEngine.rule_map.add_rule
+        依赖：无
+        功能：添加规则到规则映射。
+    GeneralEngine.rule_map.get_rule
+        依赖：无
+        功能：从规则映射中获取规则。
+    GeneralEngine.rule_map.get_rules
+        依赖：无
+        功能：从规则映射中获取所有规则。
+    GeneralEngine.rule_map.get_rule_by_name
+        依赖：无
+        功能：从规则映射中获取指定名称的规则。
+    GeneralEngine.rule_map.get_rule_by_type
+        依赖：无
+        功能：从规则映射中获取指定类型的规则。
+    GeneralEngine.rule_map.get_rule_by_types
+        依赖：无
+        功能：从规则映射中获取指定类型列表的规则。
+    GeneralEngine.rule_map.get_rule_by_types_and_name
+        依赖：无
+    功能：从规则映射中获取指定类型列表和名称的规则。
+'''
+
 from copy import copy
 from pynars.NAL.Functions.Tools import project_truth, revisible
 from pynars.NARS.DataStructures._py.Link import LinkType

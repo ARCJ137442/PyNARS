@@ -1,3 +1,21 @@
+'''
+这个文件包含了一些用于不确定性映射的函数，包括从w值计算出Truth值，以及从Truth值计算出w值的函数。这些函数可以用于NARS系统中的不确定性推理。
+
+导入模块路径列表：
+- pynars.Narsese.Truth
+
+全局变量名称及其作用：
+- fc_to_w_plus: 从f和c值计算出w+值的函数
+- fc_to_w: 从f和c值计算出w值的函数
+- fc_to_w_minus: 从f和c值计算出w-值的函数
+- w_to_f: 从w+和w值计算出f值的函数
+- w_to_c: 从w和k值计算出c值的函数
+
+各函数的依赖关系和主要功能：
+- truth_from_w: 从w+和w值计算出Truth值的函数，依赖于w_to_f和w_to_c函数
+- w_from_truth: 从Truth值计算出w+和w-值的函数，依赖于fc_to_w_plus和fc_to_w_minus函数
+'''
+
 from pynars.Narsese import Truth
 
 fc_to_w_plus    = lambda f, c, k: k*f*c/(1-c)

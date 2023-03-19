@@ -1,3 +1,86 @@
+'''
+这个文件是 Bag 类的实现，它是一个优先级队列，用于存储 Item 对象。Bag 类的实现基于多级桶，每个桶都是一个列表，其中的 Item 对象按照优先级排序。Bag 类的实现还包括一个 LUT 类，用于快速查找 Item 对象。Bag 类的实现还提供了一些方法，用于从队列中取出 Item 对象，或者将 Item 对象放入队列中。
+
+包依赖关系：
+    collections.OrderedDict
+    random
+    math
+    depq.DEPQ
+    pynars.Config
+    pynars.Narsese.Item
+    pynars.Narsese.Task
+    pynars.NAL.Functions.BudgetFunctions
+    typing.Union
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    Bag.__init__:
+        依赖：Bag.LUT
+        功能：初始化 Bag 对象。
+    Bag.take:
+        依赖：Bag._is_current_level_empty, Bag._move_to_next_nonempty_level
+        功能：从 Bag 对象中取出一个 Item 对象。
+    Bag.take_by_key:
+        依赖：无
+        功能：从 Bag 对象中取出一个指定 key 的 Item 对象。
+    Bag.take_min:
+        依赖：Bag._get_min_nonempty_level
+        功能：从 Bag 对象中取出一个优先级最低的 Item 对象。
+    Bag.take_max:
+        依赖：Bag._get_max_nonempty_level
+        功能：从 Bag 对象中取出一个优先级最高的 Item 对象。
+    Bag.put:
+        依赖：Bag.take_by_key, Bag._get_min_nonempty_level, Bag.LUT, pynars.NAL.Functions.BudgetFunctions.Budget_merge
+        功能：将一个 Item 对象放入 Bag 对象中。
+    Bag.put_back:
+        依赖：Bag.decay, Bag.put
+        功能：将一个 Item 对象放回
+    Bag.decay:
+        依赖：pynars.NAL.Functions.BudgetFunctions.Budget_decay
+        功能：将一个 Item 对象的 budget 进行衰减。
+    Bag.merge:
+        依赖：pynars.NAL.Functions.BudgetFunctions.Budget_merge
+        功能：将两个 Item 对象的 budget 进行合并。
+    Bag.count:
+        依赖：无
+        功能：返回 Bag 对象中 Item 对象的数量。
+    Bag.__contains__:
+        依赖：无
+        功能：判断一个 Item 对象是否在 Bag 对象中。
+    Bag.__iter__:
+        依赖：无
+        功能：返回 Bag 对象中所有 Item 对象的迭代器。
+    Bag.__len__:
+        依赖：无
+        功能：返回 Bag 对象中 Item 对象的数量。
+    Bag._is_current_level_empty:
+        依赖：无
+        功能：判断当前 bucket 是否为空。
+    Bag._move_to_next_nonempty_level:
+        依赖：Bag._is_current_level_empty
+        功能：将指针移动到下一个非空 bucket。
+    Bag._move_to_max_nonempty_level:
+        依赖：无
+        功能：将指针移动到最后一个非空 bucket。
+    Bag._get_min_nonempty_level:
+        依赖：Bag._move_to_min_nonempty_level
+        功能：返回第一个非空 bucket 的编号。
+    Bag._get_max_nonempty_level:
+        依赖：无
+        功能：返回最后一个非空 bucket 的编号。
+    Bag._move_to_min_nonempty_level:
+        依赖：Bag._move_to_next_nonempty_level
+        功能：将指针移动到第一个非空 bucket。
+    Bag._move_down_to_next_level:
+        依赖：无
+        功能：将指针向下移动一个 bucket。
+    Bag._move_upward_to_next_level:
+        依赖：无
+        功能：将指针向上移动一个 bucket。
+'''
+
 from collections import OrderedDict
 import random
 import math

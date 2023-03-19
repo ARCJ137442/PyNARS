@@ -1,4 +1,29 @@
 '''
+这个文件是一个使用NARS来玩Atari Pong游戏的例子。在这个文件中，我们使用了NARS来实现一个策略，这个策略会根据游戏中的状态来决定下一步的行动。这个文件中的代码包含了一个感知器和一个策略函数，以及一些辅助函数。
+
+包依赖关系：
+    gym
+    atariari
+    typing
+    typing_extensions
+    pynars
+
+全局变量名称及其作用：
+    rander_mode: 用于指定渲染模式
+
+各函数的依赖关系和主要功能：
+    Perceptron:
+        依赖：无
+        功能：根据游戏中的状态，生成一个NARS任务
+    policy_nars:
+        依赖：Perceptron
+        功能：使用NARS来实现一个策略，这个策略会根据游戏中的状态来决定下一步的行动
+    run:
+        依赖：gym, AtariARIWrapper, policy_nars
+        功能：运行整个程序
+'''
+
+'''
 Pong-v0
 
 Maximize your score in the Atari 2600 game Pong. In this environment, the observation is an RGB image of the screen, which is an array of shape (210, 160, 3) Each action is repeatedly performed for a duration of kk frames, where kk is uniformly sampled from {2,3,4}.

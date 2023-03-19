@@ -1,4 +1,48 @@
 '''
+这个文件实现了变量替换的相关功能，包括变量替换、消除和引入。其中变量替换是指将一个语句中的独立变量替换为另一个项（常量或变量）；将语句中的一个项（常量或变量）替换为一个依赖变量项。这些替换的反向情况仅限于NAL-6中讨论的情况。问题中的查询变量可以被替换为判断中的常量项。
+
+包依赖关系：
+    bidict
+    pynars.Narsese.Term
+    pynars.Narsese.Statement
+    pynars.Narsese.Compound
+    pynars.utils.IndexVar
+    pynars.utils.tools
+
+全局变量名称及其作用：
+    find_var_with_pos: 用于查找具有相同位置的变量
+    find_pos_with_pos: 用于查找具有相同位置的位置
+
+各函数的依赖关系和主要功能：
+    unification__var_var:
+        依赖：find_var_with_pos
+        功能：将两个变量项进行替换
+    unification__const_var:
+        依赖：无
+        功能：将常量项引入到变量项中
+    unification__var_const:
+        依赖：find_var_with_pos, find_pos_with_pos
+        功能：将变量项消除为常量项
+    unification:
+        依赖：无
+        功能：查找可能的替换
+'''
+from copy import deepcopy
+from typing import Callable, Dict, List, Tuple, Union
+
+from bidict import bidict
+from pynars.Narsese import Term
+from pynars.Narsese import Statement, Compound
+from pynars.utils.IndexVar import IndexVar, IntVar
+from pynars.utils.tools import find_pos_with_pos, find_var_with_pos
+
+from .Substitution import Substitution
+from .Elimination import Elimination
+from .Introduction import Introduction
+
+# find_var_with_pos:
+
+'''
 **Variable substitution.** All occurrences of an independent variable term in a statement can be substituted by another term (constant or variable); all occurrences of a term (constant or variable) in a statement can be substituted by a dependent variable term. The reverse cases of these substitution are limited to the cases discussed in NAL-6. A query variable in a question can be substituted by a constant term in a judgment.
 '''
 

@@ -1,3 +1,62 @@
+'''
+这个文件包含了Evidential Base类，它是一个证据库的基类，用于存储证据。此外，还包含了interleave函数，用于将两个证据库合并。
+
+
+包依赖关系：
+    - ordered_set: 用于实现有序集合
+    - pynars.Narsese._py.Truth: 用于实现Truth类
+    - pynars.Narsese._py.Term: 用于实现Term类
+    - pynars.Narsese._py.Statement: 用于实现Statement类
+    - pynars.Narsese._py.Tense: 用于实现Tense类
+    - typing: 用于类型提示
+    - pynars.Config: 用于读取配置文件
+    - pynars.Global: 用于读取全局变量
+
+
+全局变量名称及其作用：
+    - Config: 用于读取配置文件
+    - Global: 用于读取全局变量
+
+
+各函数的依赖关系和主要功能：
+    - Base:
+        依赖：ordered_set, pynars.Narsese._py.Truth, pynars.Narsese._py.Term, pynars.Narsese._py.Statement, pynars.Narsese._py.Tense, typing, pynars.Config, pynars.Global
+        功能：Evidential Base类，用于存储证据。
+    - Base.interleave:
+        依赖：无
+        功能：将两个证据库合并。
+    - Base.add:
+        依赖：无
+        功能：向证据库中添加证据。
+    - Base.extend:
+        依赖：无
+        功能：将另一个证据库中的证据添加到当前证据库中。
+    - Base.is_overlaped:
+        依赖：无
+        功能：检查另一个证据库是否与当前证据库重叠。
+    - Base.do_hashing:
+        依赖：无
+        功能：计算证据库的哈希值。
+    - Base.__eq__:
+        依赖：无
+        功能：判断两个证据库是否相等。
+    - Base.__or__:
+        依赖：无
+        功能：将两个证据库合并。
+    - Base.__ior__:
+        依赖：无
+        功能：将另一个证据库中的证据添加到当前证据库中。
+    - Base.__hash__:
+        依赖：无
+        功能：计算证据库的哈希值。
+    - Base.__len__:
+        依赖：无
+        功能：返回证据库中证据的数量。
+    - Base.__repr__:
+        依赖：无
+        功能：返回证据库的字符串表示形式。
+
+'''
 # from pynars.Narsese._py.Task import Task
 from .Truth import Truth
 from .Term import Term

@@ -1,6 +1,24 @@
 '''
+这个文件是PyNARS的配置文件，包含了PyNARS的各种超参数和配置信息。这个文件的主要作用是提供一个统一的配置接口，方便用户对PyNARS的各种参数进行调整。
+
+包依赖关系：
+    - pathlib.Path
+    - jstyleson.json
+
+全局变量名称及其作用：
+    - Enable: 一个类，包含了PyNARS的各种开关，用于控制PyNARS的各种功能是否开启。
+    - Config: 一个类，包含了PyNARS的各种超参数和配置信息。
+
+各函数的依赖关系和主要功能：
+    - load:
+        依赖：pathlib.Path, jstyleson.json
+        功能：从指定的json文件中读取超参数和配置信息，并将其应用到Config类中。
+'''
+
+'''
 Configure some hyper-parameters and some other settings via the file `config.json`.
 '''
+
 from pathlib import Path
 
 try:

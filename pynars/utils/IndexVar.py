@@ -1,3 +1,30 @@
+'''
+这个模块包含了两个类：IntVar和IndexVar。IntVar是一个简单的整数类，而IndexVar是一个用于表示NARS中的变量的类。IndexVar类的实例包含了三个列表，分别表示独立变量、依赖变量和查询变量。这个类还提供了一些方法，用于将多个IndexVar实例合并成一个实例，或者将一个IndexVar实例替换为另一个实例。
+
+包依赖关系：
+    - copy
+    - typing
+    - enum
+    - ordered_set
+    - bidict
+    - numpy
+
+全局变量名称及其作用：
+    - _positions_normalized: 用于存储规范化后的变量位置。
+    - _hash_value: 用于存储规范化后的变量位置的哈希值。
+
+各函数的依赖关系和主要功能：
+    - IntVar:
+        依赖：无
+        功能：定义了一个简单的整数类，提供了一些常见的运算符重载方法。
+    - IndexVar:
+        依赖：IntVar
+        功能：定义了一个用于表示NARS中的变量的类，提供了一些方法，用于将多个IndexVar实例合并成一个实例，或者将一个IndexVar实例替换为另一个实例。
+    - _normalize:
+        依赖：无
+        功能：将变量位置规范化，使其唯一。
+'''
+
 from copy import deepcopy
 from typing import Union
 import enum

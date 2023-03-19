@@ -1,3 +1,40 @@
+'''
+这个文件包含了一些组合规则的接口函数，这些函数可以用于组合不同的Narsese语句。这些函数都是在pynars.NAL.Inference模块中定义的。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    pynars.Narsese
+    pynars.NAL.Inference
+    pynars.NAL.Theorems
+    pynars.Global
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    _compositional__intersection_extension__0_0:
+        依赖：compositional__intersection_extension
+        功能：将两个具有相同主语的Narsese语句进行交集组合
+    _compositional__union_extension__0_0:
+        依赖：compositional__union_extension
+        功能：将两个具有相同主语的Narsese语句进行并集组合
+    _compositional__intersection_intension__1_1:
+        依赖：compositional__intersection_intension
+        功能：将两个具有相同谓语的Narsese语句进行交集组合
+    _compositional__union_intension__1_1:
+        依赖：compositional__union_intension
+        功能：将两个具有相同谓语的Narsese语句进行并集组合
+    _compositional__conjunction_extension__0_0:
+        依赖：compositional__conjunction_extension
+        功能：将两个具有相同主语的Narsese语句进行合取组合
+    _compositional__disjunction_extension__0_0:
+        依赖：compositional__disjunction_extension
+        功能：将两个具有相同主语的Narsese语句进行析取组合
+    _compositional__conjunction_intension__1_1:
+        依赖：compositional__disjunction_intension
+        功能：将两个具有相同谓语的Narsese语句进行析取组合
+'''
+
 from pynars.NARS.DataStructures import Link, TaskLink, TermLink, LinkType, Task
 from pynars.Narsese import Belief
 from pynars.NAL.Inference import *

@@ -1,3 +1,36 @@
+'''
+这个文件实现了同类型项之间的替换，包括 ivar-to-ivar, dvar-to-dvar, qvar-to-qvar, const-to-const。主要包含以下内容：
+
+- 包依赖关系：
+    - bidict
+    - pynars.Narsese.Term
+    - pynars.utils.IndexVar.IntVar
+- 全局变量名称及其作用：
+    - Substitution: 同类型项之间的替换
+- 各函数的依赖关系和主要功能：
+    - __init__:
+        - 依赖：无
+        - 功能：初始化 Substitution 实例
+    - is_valid:
+        - 依赖：无
+        - 功能：判断 Substitution 实例是否有效
+    - is_qvar_valid:
+        - 依赖：无
+        - 功能：判断 Substitution 实例中 qvar 是否有效
+    - is_dvar_valid:
+        - 依赖：无
+        - 功能：判断 Substitution 实例中 dvar 是否有效
+    - is_ivar_valid:
+        - 依赖：无
+        - 功能：判断 Substitution 实例中 ivar 是否有效
+    - apply:
+        - 依赖：copy.deepcopy, bidict
+        - 功能：将 term_src 中的同类型项替换为 term_tgt 中的同类型项
+    - _build_mapping:
+        - 依赖：bidict
+        - 功能：构建同类型项之间的映射
+'''
+
 from copy import deepcopy
 from typing import List
 

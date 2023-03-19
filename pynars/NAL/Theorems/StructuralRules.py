@@ -1,3 +1,68 @@
+'''
+这个文件包含了NARS系统中的结构规则，包括了继承定理和转换定理等。这些规则用于推理和推导NARS系统中的知识。
+
+包依赖关系：
+    typing.List
+    pynars.Narsese.Copula
+    pynars.Narsese.Statement
+    pynars.Narsese.Compound
+    pynars.Narsese.Connector
+    pynars.Narsese.Term
+    pynars.Narsese.Judgement
+    pynars.Narsese.Truth
+    pynars.Narsese.Task
+    pynars.Narsese.Belief
+    pynars.Narsese.Budget
+    pynars.Narsese.Stamp
+    pynars.Narsese.Goal
+    pynars.Narsese.Quest
+    pynars.Narsese.Question
+    pynars.Narsese.place_holder
+    pynars.Narsese.truth_analytic
+    pynars.Functions.TruthValueFunctions
+    pynars.Functions.DesireValueFunctions
+    pynars.Functions.StampFunctions
+    pynars.Functions.BudgetFunctions
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    uni_composition:
+        依赖：Truth_deduction, Budget_forward_compound
+        功能：单向合成规则，用于推导新的判断。
+    uni_composition_prime:
+        依赖：Truth_negation, Truth_deduction, Budget_forward_compound
+        功能：单向否定合成规则，用于推导新的判断。
+    uni_decomposition:
+        依赖：Truth_deduction, Budget_forward_compound
+        功能：单向分解规则，用于推导新的判断。
+    bi_composition:
+        依赖：Truth_deduction, Budget_forward_compound
+        功能：双向合成规则，用于推导新的判断。
+    bi_composition_prime:
+        依赖：Truth_deduction, Budget_forward_compound
+        功能：双向否定合成规则，用于推导新的判断。
+    bi_decomposition:
+        依赖：无
+        功能：双向分解规则，用于推导新的判断。
+    transform_product_to_image:
+        依赖：无
+        功能：将一个复合项转换为其意象。
+    transform_image_to_product:
+        依赖：无
+        功能：将一个意象转换为其复合项。
+    transform_product_to_image_higher_order:
+        依赖：无
+        功能：将一个高阶复合项转换为其意象。
+
+    推理规则列表：（因代码量过大，上下文信息容易丢失，这里没法自动生成）
+        inheritance_theorem 6
+        inheritance_theorem 7
+        implication_theorem 26
+        equivalence_theorem 20
+
+'''
 from typing import List
 from pynars.Narsese import Copula, Statement, Compound, Connector, Term, Judgement, Truth, Task, Belief, Budget, Stamp, Goal, Quest, Question
 from pynars.Narsese import place_holder, truth_analytic

@@ -1,3 +1,23 @@
+'''
+TemporalFunctions.py
+
+这个文件包含了一些处理时间的函数，包括project和eternalize。
+
+导入模块路径列表：
+- pynars.Narsese.Truth
+- .UncertaintyMappingFunctions.w_to_c
+
+全局变量名称及其作用：
+无
+
+各函数的依赖关系和主要功能：
+- project(truth: Truth, t_source: int, t_current: int, t_target: int)
+    - 依赖：Truth, .UncertaintyMappingFunctions.w_to_c
+    - 主要功能：根据时间信息对Truth进行投影
+- eternalize(truth: Truth)
+    - 依赖：Truth, .UncertaintyMappingFunctions.w_to_c
+    - 主要功能：将Truth永久化
+'''
 
 from pynars.Narsese import Truth
 from .UncertaintyMappingFunctions import w_to_c

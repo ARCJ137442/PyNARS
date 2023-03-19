@@ -1,3 +1,63 @@
+'''
+这个文件定义了Link、TermLink和TaskLink三个类，它们分别表示NARS中的三种链接类型。Link类是它们的基类，它定义了链接的基本属性和方法。TermLink类表示TermLink类型的链接，TaskLink类表示TaskLink类型的链接。这些链接类型的定义和实现都是基于NARS的语法和语义的。
+
+包依赖关系：
+    enum
+    enum
+    pynars.Narsese.Item
+    pynars.Narsese.Budget
+    pynars.Narsese.Task
+    pynars.Narsese.Term
+    typing.List
+    typing.Type
+    pynars.Narsese._py.Compound
+    pynars.Narsese._py.Connector
+    pynars.Narsese._py.Copula
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Truth
+    .Concept
+    copy
+    pynars.NAL.Functions.ExtendedBooleanFunctions
+    pynars.Config
+
+全局变量名称及其作用：
+    LinkType: 枚举类型，表示链接的类型。
+    Link.link_id: 静态变量，表示链接的编号。
+    Link.component_index: 实例变量，表示链接的组成部分的索引。
+    Link.source: 实例变量，表示链接的源概念。
+    Link.target: 实例变量，表示链接的目标概念。
+    Link.source_is_component: 实例变量，表示链接的源概念是否是组成部分。
+    Link.type: 实例变量，表示链接的类型。
+    TermLink: 类型，表示TermLink类型的链接。
+    TaskLink: 类型，表示TaskLink类型的链接。
+
+各函数的依赖关系和主要功能：
+    Link.__init__:
+        依赖：Link.link_id, Item.__init__
+        功能：初始化Link实例。
+    Link.set_type:
+        依赖：无
+        功能：设置Link实例的类型。
+    Link.get_index:
+        依赖：无
+        功能：获取一个概念在另一个概念中的索引。
+    Link.update_budget:
+        依赖：Or
+        功能：更新Link实例的预算。
+    Link.is_valid:
+        依赖：无
+        功能：判断Link实例是否有效。
+    Link.__str__:
+        依赖：无
+        功能：返回Link实例的字符串表示。
+    TermLink.__init__:
+        依赖：Link.__init__
+        功能：初始化TermLink实例。
+    TermLink.set_type:
+        依赖：Link.set_type
+        功能：设置TermLink实例的类型。
+'''
+
 from enum import Enum
 import enum
 from pynars.Narsese import Item, Budget, Task, Term

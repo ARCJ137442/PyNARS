@@ -1,3 +1,58 @@
+'''
+这个文件定义了一个名为Compound的类，它是Term类的子类，表示复合项。Compound类的实例可以由多个Term实例组成，这些Term实例通过一个Connector实例连接在一起。Compound类的实例可以表示Narsese语言中的复合项，例如{A, B}、(A & B)、(A | B)等。
+
+包依赖关系：
+    numpy
+    ordered_set
+    matplotlib.pyplot
+    pynars.Config
+    pynars.Narsese._py.Interval
+    pynars.utils.IndexVar
+    pynars.NAL.Functions.ExtendedBooleanFunctions
+    pynars.utils.tools
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    Compound.__init__:
+        依赖：numpy, ordered_set, matplotlib.pyplot, pynars.Config, pynars.Narsese._py.Interval, pynars.utils.IndexVar, pynars.NAL.Functions.ExtendedBooleanFunctions, pynars.utils.tools
+        功能：初始化Compound类的实例，将多个Term实例通过一个Connector实例连接在一起，表示复合项。Compound类的实例可以表示Narsese语言中的复合项，例如{A, B}、(A & B)、(A | B)等。
+    Compound.prepocess_terms:
+        依赖：无
+        功能：预处理terms，返回该Compound的connector和terms。
+    Compound._merge_compounds:
+        依赖：无
+        功能：将多个Compound实例合并成一个Compound实例。
+    Compound.count_components:
+        依赖：无
+        功能：返回该Compound实例中Term实例的数量。
+    Compound.contains:
+        依赖：无
+        功能：判断该Compound实例是否包含指定的Compound实例。
+    Compound.__iter__:
+        依赖：无
+        功能：返回该Compound实例的迭代器。
+    Compound.__getitem__:
+        依赖：无
+        功能：返回该Compound实例中指定位置的Term实例。
+    Compound.__sub__:
+        依赖：无
+        功能：从该Compound实例中删除指定的Term实例，并返回新的Compound实例。
+    Compound.__rsub__:
+        依赖：无
+        功能：从指定的Term实例中删除该Compound实例，并返回新的Compound实例。
+    Compound.has_common:
+        依赖：无
+        功能：判断该Compound实例是否与指定的Compound实例有公共部分。
+    Compound.copy:
+        依赖：无
+        功能：返回该Compound实例的浅拷贝。
+    Compound.replace:
+        依赖：无
+        功能：将该Compound实例中的所有Term实例替换为指定的Term实例，并返回新的Compound实例。如果指定的Term实例在该Compound实例中不存在，则返回原Compound实例的浅拷贝。
+'''
+
 # from pynars.NAL.Functions.ExtendedBooleanFunctions import Or
 from copy import copy
 import enum

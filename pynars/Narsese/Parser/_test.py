@@ -1,3 +1,19 @@
+'''
+这是一个Narsese解析器的测试文件，用于测试Narsese解析器的各种功能。
+
+包依赖关系：
+    无
+
+全局变量名称及其作用：
+    re_parser: 用于解析Narsese语句的正则表达式
+    parser: Narsese解析器
+
+各函数的依赖关系和主要功能：
+    parser.parse:
+        依赖：re_parser
+        功能：解析Narsese语句并返回解析结果
+'''
+
 from .parser import parser
 import re
 re_parser = re.compile(r'[^<^>^=^"^&^|^!^.^?^@^~^%^;^\,^:^\/^\\^*^#^$^\[^\]^\{^\}^\(^\)^\ ]+')

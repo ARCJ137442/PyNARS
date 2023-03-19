@@ -1,3 +1,28 @@
+'''
+这是一个用于安装PyNARS的setup.py文件，其中包含了PyNARS的版本信息、依赖关系、作者信息等。通过运行此文件，可以将PyNARS安装到本地环境中。
+
+包依赖关系：
+    setuptools
+    pynars
+
+全局变量名称及其作用：
+    this_directory: 当前文件所在目录的绝对路径
+    long_description: 用于在PyPI上展示的项目介绍
+
+各函数的依赖关系和主要功能：
+    read_file(filename):
+        依赖：os_path
+        功能：读取指定文件的内容并返回
+
+    read_requirements(filename):
+        依赖：read_file
+        功能：读取指定文件中的依赖关系并返回
+
+    setup():
+        依赖：find_packages, read_requirements
+        功能：设置PyNARS的安装信息，包括名称、版本、作者、依赖关系等
+'''
+
 from os import path as os_path
 from setuptools import setup, find_packages
 import pynars

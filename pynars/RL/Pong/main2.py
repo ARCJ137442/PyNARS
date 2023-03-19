@@ -1,4 +1,30 @@
 '''
+这个文件是一个使用NARS（Non-Axiomatic Reasoning System）实现的Pong游戏AI。它使用感知器（Perceptron）来感知游戏状态，然后将感知结果传递给NARS系统进行推理，最后根据推理结果来决定下一步的行动。这个文件的主要功能是实现一个Pong游戏AI，并使用NARS系统进行推理。
+
+包依赖关系：
+    gym
+    atariari
+    typing
+    pynars
+
+全局变量名称及其作用：
+    rander_mode: 渲染模式，值为'human'。
+
+各函数的依赖关系和主要功能：
+    Perceptron:
+        依赖：无
+        功能：感知游戏状态，返回感知结果。
+
+    policy_nars:
+        依赖：Perceptron
+        功能：使用NARS系统进行推理，根据推理结果来决定下一步的行动。
+
+    run:
+        依赖：gym, atariari
+        功能：运行Pong游戏AI。
+'''
+
+'''
 Pong-v0
 
 Maximize your score in the Atari 2600 game Pong. In this environment, the observation is an RGB image of the screen, which is an array of shape (210, 160, 3) Each action is repeatedly performed for a duration of kk frames, where kk is uniformly sampled from {2,3,4}.

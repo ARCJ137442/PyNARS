@@ -1,3 +1,54 @@
+'''
+包依赖关系：
+    math
+    pynars.Narsese
+    pynars.Config
+    .ExtendedBooleanFunctions
+    copy
+    .UncertaintyMappingFunctions
+    .Tools
+
+全局变量名称及其作用：
+    Config: 用于存储系统参数
+    truth_to_quality: 将Truth转化为Quality
+    w_to_c: 将w转化为c
+
+各函数的依赖关系和主要功能：
+    Budget_revision:
+        依赖：无
+        功能：根据任务的truth和derived truth，修订任务的budget，以及与之相关的task link和term link的budget
+    Budget_inference:
+        依赖：无
+        功能：根据quality、task link和term link的budget，计算新的budget
+    Budget_forward:
+        依赖：Budget_inference, truth_to_quality
+        功能：根据新任务的truth和task link的budget，计算新任务的budget
+    Budget_backward:
+        依赖：Budget_inference, truth_to_quality
+        功能：根据新任务的truth和task link的budget，计算新任务的budget
+    Budget_backward_weak:
+        依赖：Budget_inference, truth_to_quality, w_to_c
+        功能：根据新任务的truth和task link的budget，计算新任务的budget
+    Budget_forward_compound:
+        依赖：Budget_inference, truth_to_quality, Config
+        功能：根据新任务的truth、task link的budget和content的complexity，计算新任务的budget
+    Budget_backward_compound:
+        依赖：Budget_inference, Config
+        功能：根据task link的budget和content的complexity，计算新任务的budget
+    Budget_backward_weak_compound:
+        依赖：Budget_inference, w_to_c, Config
+        功能：根据task link的budget和content的complexity，计算新任务的budget
+    Budget_decay:
+        依赖：无
+        功能：根据budget的priority、durability和quality，计算新的budget，以及根据budget的priority和durability，更新quality和durability
+    Budget_merge:
+        依赖：无
+        功能：将两个budget合并，返回合并后的budget
+    Budget_decay:
+        依赖：无
+        功能：根据budget的priority、durability和quality，更新priority，以及根据Config中的参数，更新durability
+'''
+
 # from pynars.NARS.DataStructures._py.Link import TermLink
 from math import log2
 from pynars.Narsese import Budget, Truth, Term

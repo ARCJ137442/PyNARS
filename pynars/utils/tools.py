@@ -1,3 +1,32 @@
+'''
+这个文件包含了一些工具函数，用于辅助PyNARS的其他部分。这些函数包括：
+
+包依赖关系：
+    无
+
+全局变量名称及其作用：
+    getsizeof: 一个函数，用于获取对象的大小。
+    list_contains: 一个函数，用于判断一个列表是否包含另一个列表。
+    rand_seed: 一个函数，用于设置随机数生成器的种子。
+
+各函数的依赖关系和主要功能：
+    get_size:
+        依赖：无
+        功能：递归地计算对象的大小。
+    list_contains:
+        依赖：无
+        功能：判断一个列表是否包含另一个列表。
+    rand_seed:
+        依赖：random, numpy
+        功能：设置随机数生成器的种子。
+    find_var_with_pos:
+        依赖：无
+        功能：找到具有相同位置头的变量。
+    find_pos_with_pos:
+        依赖：无
+        功能：找到具有相同位置头的位置。
+'''
+
 import sys
 from typing import Callable, List
 

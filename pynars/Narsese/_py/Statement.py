@@ -1,3 +1,71 @@
+'''
+这个文件定义了一个名为Statement的类，它是Term的子类，表示一个语句。Statement类有多个方法，包括__init__、__getitem__、equal、has_common、__repr__、repr_with_var、Inheritance、Implication、Similarity、Equivalence、PredictiveImplication、ConcurrentImplication、RetrospectiveImplication、PredictiveEquivalence、ConcurrentEquivalence和clone。Statement类的实例可以表示一个语句，包括主语、谓语和谓词。Statement类的实例可以进行比较、克隆等操作。
+
+包依赖关系：
+    - copy
+    - enum
+    - lib2to3.pgen2.tokenize
+    - pynars.Config
+    - pynars.utils.IndexVar
+    - pynars.Narsese._py.Term
+    - pynars.Narsese._py.Copula
+    - typing
+    - ordered_set
+
+全局变量名称及其作用：
+    - Enable: 一个类，表示NARS系统的配置。包括是否启用变量、是否启用时间等。
+
+各函数的依赖关系和主要功能：
+    - __init__:
+        依赖：Term、Copula、OrderedSet
+        功能：初始化一个Statement实例。
+    - __getitem__:
+        依赖：无
+        功能：获取Statement实例的子项。
+    - equal:
+        依赖：无
+        功能：比较两个Statement实例是否相等。
+    - has_common:
+        依赖：无
+        功能：判断两个Statement实例是否有公共部分。
+    - __repr__:
+        依赖：无
+        功能：返回Statement实例的字符串表示。
+    - repr_with_var:
+        依赖：无
+        功能：返回Statement实例的字符串表示，包括变量。
+    - Inheritance:
+        依赖：__init__
+        功能：创建一个表示继承关系的Statement实例。
+    - Implication:
+        依赖：Term、Copula
+        功能：创建一个表示蕴含关系的Statement实例。
+    - Similarity:
+        依赖：Term、Copula
+        功能：创建一个表示相似关系的Statement实例。
+    - Equivalence:
+        依赖：Term、Copula
+        功能：创建一个表示等价关系的Statement实例。
+    - PredictiveImplication:
+        依赖：Term、Copula
+        功能：创建一个表示预测蕴含关系的Statement实例。
+    - ConcurrentImplication:
+        依赖：Term、Copula
+        功能：创建一个表示并发蕴含关系的Statement实例。
+    - RetrospectiveImplication:
+        依赖：Term、Copula
+        功能：创建一个表示回顾蕴含关系的Statement实例。
+    - PredictiveEquivalence:
+        依赖：Term、Copula
+        功能：创建一个表示预测等价关系的Statement实例。
+    - ConcurrentEquivalence:
+        依赖：Term、Copula
+        功能：创建一个表示并发等价关系的Statement实例。
+    - clone:
+        依赖：copy
+        功能：克隆一个Statement实例。
+'''
+
 from copy import copy
 import enum
 from lib2to3.pgen2.tokenize import StopTokenizing

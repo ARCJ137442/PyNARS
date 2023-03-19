@@ -1,3 +1,22 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了NAL7规则。NAL7规则是一种基于时间的推理规则，它可以用于推理和学习。这个模块中的函数实现了NAL7规则的不同变体，以及它们之间的组合。这个模块中的函数都是为了实现NAL7规则而设计的。
+
+包依赖关系：
+    collections.OrderedDict
+    pynars.NARS.DataStructures
+    sparse_lut
+    pynars.Global
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL7:
+        依赖：Interface_TemporalRules
+        功能：实现NAL7规则的不同变体和它们之间的组合，将它们添加到给定的稀疏查找表和有序字典结构中。这些规则是基于时间的推理规则，可以用于推理和学习。这个函数依赖于Interface_TemporalRules模块。
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from sparse_lut import SparseLUT

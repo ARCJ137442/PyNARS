@@ -1,3 +1,73 @@
+'''
+这个文件包含了一些条件规则的推理函数，包括演绎、归纳、类比和拟类推理。这些函数可以用于NARS系统中的推理过程。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    pynars.Narsese
+    pynars.NAL.Inference
+    pynars.NAL.Theorems
+    pynars.Global
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    _conditional__deduction__0:
+        依赖：conditional__deduction
+        功能：推导出一个条件语句的结论，其中前提是一个简单语句。
+    _conditional__deduction__0_prime:
+        依赖：conditional__deduction
+        功能：推导出一个条件语句的结论，其中前提是一个简单语句。
+    _conditional__deduction_compound_eliminate__0:
+        依赖：conditional__deduction_compound_eliminate
+        功能：推导出一个条件语句的结论，其中前提是一个复合语句。
+    _conditional__deduction_compound_eliminate__0_prime:
+        依赖：conditional__deduction_compound_eliminate
+        功能：推导出一个条件语句的结论，其中前提是一个复合语句。
+    _conditional__deduction_compound_replace__0_1:
+        依赖：conditional__deduction_compound_replace
+        功能：推导出一个条件语句的结论，其中前提是一个复合语句。
+    _conditional__deduction_compound_replace__1_0:
+        依赖：conditional__deduction_compound_replace
+        功能：推导出一个条件语句的结论，其中前提是一个复合语句。
+    _conditional__abduction__1:
+        依赖：conditional__abduction
+        功能：从一个条件语句中推断出前提。
+    _conditional__abduction__1_prime:
+        依赖：conditional__abduction
+        功能：从一个条件语句中推断出前提。
+    _conditional__abduction_compound_eliminate__1_1:
+        依赖：conditional__abduction_compound_eliminate
+        功能：从一个条件语句中推断出前提，其中前提是一个复合语句。
+    _conditional__abduction_compound_eliminate__1_1_prime:
+        依赖：conditional__abduction_compound_eliminate
+        功能：从一个条件语句中推断出前提，其中前提是一个复合语句。
+    _conditional__abduction_compound_eliminate2__1_1:
+        依赖：conditional__abduction_compound_eliminate2
+        功能：从一个条件语句中推断出前提，其中前提是一个复合语句。
+    _conditional__abduction_compound_eliminate2__1_1_prime:
+        依赖：conditional__abduction_compound_eliminate2
+        功能：从一个条件语句中推断出前提，其中前提是一个复合语句。
+    _conditional__induction_compound_replace__0_0:
+        依赖：conditional__induction_compound_replace
+        功能：从一个条件语句中推断出结论，其中前提是一个复合语句。
+    _conditional__induction_compound_replace__0_0_prime:
+        依赖：conditional__induction_compound_replace
+        功能：从一个条件语句中推断出结论，其中前提是一个复合语句。
+    _conditional__analogy__0:
+        依赖：conditional__analogy
+        功能：从一个条件语句中推断出结论，其中前提是一个简单语句。
+    _conditional__analogy__0_prime:
+        依赖：conditional__analogy
+        功能：从一个条件语句中推断出结论，其中前提是一个简单语句。
+    _conditional__analogy__1:
+        依赖：conditional__analogy
+        功能：从一个条件语句中推断出结论，其中前提是一个简单语句。
+    _conditional__analogy__1_prime:
+        依赖：conditional__analogy
+        功能：从一个条件语句中推断出结论，其中前提是一个简单语句。
+'''
+
 from pynars.NARS.DataStructures import Link, TaskLink, TermLink, LinkType, Task
 from pynars.Narsese import Belief
 from pynars.NAL.Inference import *

@@ -1,3 +1,44 @@
+'''
+这个文件是Sentence类的实现，Sentence类是Narsese语言中的句子类，包括Judgement、Goal、Question和Quest四种类型。其中Judgement和Goal是陈述句，Question和Quest是疑问句。这个文件中还包括了Punctuation和Stamp两个类。
+
+包依赖关系：
+    ordered_set：用于实现有序集合
+    pynars.Config：用于获取配置信息
+    pynars.Global：用于获取全局变量
+
+全局变量名称及其作用：
+    无
+
+各类的依赖关系和主要功能：
+    Punctuation类：
+        依赖：无
+        功能：定义了Judgement、Question、Goal和Quest四种标点符号
+
+    Stamp类：
+        依赖：Tense类
+        功能：定义了一个时间戳，包括创建时间、事件发生时间、放入缓存的时间和证据基
+
+    Sentence类：
+        依赖：Truth类、Term类、Punctuation类、Stamp类、copy函数
+        功能：定义了一个句子，包括一个Term、一个标点符号和一个时间戳。其中包括了一些属性和方法，如evidential_base、tense、eternalize、__hash__、__str__、__repr__等。
+
+    Judgement类：
+        依赖：Truth类、Term类、Stamp类、Sentence类
+        功能：定义了一个陈述句，包括一个Term、一个时间戳和一个Truth。其中包括了一些属性和方法，如__str__、repr等。
+
+    Goal类：
+        依赖：Truth类、Term类、Stamp类、Sentence类
+        功能：定义了一个目标句，包括一个Term、一个时间戳和一个Truth。其中包括了一些属性和方法，如__str__、repr等。
+
+    Question类：
+        依赖：Term类、Stamp类、Sentence类
+        功能：定义了一个疑问句，包括一个Term、一个时间戳。其中包括了一些属性和方法，如__str__、repr等。
+
+    Quest类：
+        依赖：Term类、Stamp类、Sentence类
+        功能：定义了一个Quest句，包括一个Term、一个时间戳。其中包括了一些属性和方法，如__str__、repr等。
+'''
+
 from copy import copy
 from .Truth import Truth
 from .Term import Term

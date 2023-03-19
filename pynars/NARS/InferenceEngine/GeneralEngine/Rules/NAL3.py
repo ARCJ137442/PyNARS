@@ -1,3 +1,21 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了NAL3的规则。NAL3是NARS的第三代版本，它引入了复合命题和复合概念，使得NARS能够处理更加复杂的问题。这个模块中的函数实现了NAL3的规则，包括组合规则和分解规则。这些规则是NARS推理的基础，它们使得NARS能够从简单的命题中推导出更加复杂的命题，从而实现推理的功能。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    sparse_lut
+    pynars.Global
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL3:
+        依赖：pynars.NARS.DataStructures, sparse_lut, pynars.Global, ....RuleMap.add_rule
+        功能：实现NAL3的规则，包括组合规则和分解规则。这些规则是NARS推理的基础，它们使得NARS能够从简单的命题中推导出更加复杂的命题，从而实现推理的功能。
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from sparse_lut import SparseLUT

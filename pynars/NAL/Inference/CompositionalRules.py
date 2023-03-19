@@ -1,4 +1,41 @@
 '''
+这个py文件包含了一些组合规则的函数，这些函数用于推理过程中的组合操作。
+
+- 导入模块路径列表：
+    - pynars.Narsese
+    - pynars.Narsese.Copula
+    - pynars.Narsese.Statement
+    - pynars.Narsese.Compound
+    - pynars.Narsese.Connector
+    - pynars.Narsese.Task
+    - pynars.Narsese.Belief
+    - pynars.Narsese.Budget
+    - pynars.Narsese.Truth
+    - pynars.Functions
+    - pynars.Narsese.Judgement
+    - pynars.Narsese.Goal
+    - pynars.Narsese.Quest
+    - pynars.Narsese.Question
+
+- 全局变量名称及其作用：
+    - 无
+
+- 各函数的依赖关系和主要功能：
+    - intersection_extension: 用于计算两个概念的交集
+    - union_extension: 用于计算两个概念的并集
+    - difference_extension: 用于计算两个概念的差集
+    - intersection_intension: 用于计算两个属性的交集
+    - union_intension: 用于计算两个属性的并集
+    - difference_intension: 用于计算两个属性的差集
+    - conjunction_extension: 用于计算两个概念的合取
+    - disjunction_extension: 用于计算两个概念的析取
+    - disjunction_intension: 用于计算两个属性的析取
+    - conjunction_intension: 用于计算两个属性的合取
+    - conjunstion_composition: 用于计算两个概念的合成
+    - disjunction_composition: 用于计算两个概念的合成
+'''
+
+'''
 Composition rules
 '''
 from pynars.Narsese import Copula, Statement, Compound, Connector, Task, Belief, Budget, Truth

@@ -1,3 +1,27 @@
+'''
+这个文件是PyNARS中的一个模块，提供了一些函数来提取NARS语句的特征。这些特征可以用于判断两个NARS语句之间的关系，例如是否存在共同的ID，是否存在关系等等。
+
+包依赖关系：
+    typing.Union
+    collections.namedtuple
+    pynars.Narsese._py.Connector.Connector
+    pynars.NAL.Inference
+    pynars.Narsese.Statement
+    pynars.Narsese.Term
+    pynars.Narsese.Compound
+
+全局变量名称及其作用：
+    Feature: 一个namedtuple，用于存储提取出来的特征。
+
+各函数的依赖关系和主要功能：
+    _mirorr_feature:
+        依赖：extract_feature
+        功能：提取两个NARS语句的特征，并将其中一个语句的主语和谓语交换后再提取一次特征，返回两个特征的差异。
+    extract_feature:
+        依赖：无
+        功能：提取两个NARS语句的特征，返回一个Feature对象，其中包含了这两个语句之间的关系。
+'''
+
 from typing import Union
 from collections import namedtuple
 

@@ -1,3 +1,43 @@
+'''
+这个文件包含了一些本地推理规则，用于在NARS中进行推理。
+
+## 导入模块路径列表
+- typing.List
+- typing.Union
+- pynars.NAL.Functions.BudgetFunctions.Budget_revision
+- pynars.NAL.Functions.ExtendedBooleanFunctions.Or
+- pynars.NAL.Functions.StampFunctions.Stamp_merge
+- pynars.Narsese.Stamp
+- pynars.Narsese.Task
+- pynars.Narsese._py.Budget.Budget
+- pynars.Narsese._py.Sentence.Goal
+- pynars.Narsese._py.Sentence.Quest
+- pynars.Narsese._py.Sentence.Question
+- pynars.Narsese._py.Task.Belief
+- pynars.Narsese.Sentence
+- pynars.Narsese.Judgement
+- pynars.Narsese.Truth
+- pynars.Global
+- pynars.Config.Enable
+- pynars.NAL.Functions.Tools.calculate_solution_quality
+- pynars.NAL.Functions.Tools.truth_to_quality
+- copy.deepcopy
+
+## 全局变量名称及其作用
+- 无
+
+## 各函数的依赖关系和主要功能
+- revision: 用于将两个任务的真值进行合并，并返回一个新的任务。
+- solution_question: 用于解决一个问题，将问题的答案与一个信念进行比较，如果答案更好，则更新问题的最佳答案，并将信念的真值作为奖励。
+- solution_query: 用于解决一个查询，目前未实现。
+- solve_query: 用于解决一个查询，目前未实现。
+- Truth_revision: 用于将两个真值进行合并，并返回一个新的真值。
+- Or: 用于计算两个布尔值的逻辑或。
+- Stamp_merge: 用于将两个时间戳进行合并，并返回一个新的时间戳。
+- calculate_solution_quality: 用于计算一个问题的答案与一个信念的质量。
+- truth_to_quality: 用于将一个真值转换为一个质量值。
+'''
+
 from typing import List, Union
 from pynars.NAL.Functions.BudgetFunctions import Budget_revision
 from pynars.NAL.Functions.ExtendedBooleanFunctions import Or

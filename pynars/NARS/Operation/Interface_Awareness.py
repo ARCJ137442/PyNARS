@@ -1,3 +1,30 @@
+'''
+这个文件是pynars.NAL.MentalOperation._aware模块中的Interface_Awareness.py文件，它提供了一些与意识相关的函数，包括aware__believe、aware__wonder和aware__evaluate等。这些函数可以帮助系统进行推理和决策。
+
+包依赖关系：
+    pynars.NAL.MentalOperation._aware
+    pynars.NARS.DataStructures._py.Concept
+    pynars.NARS.DataStructures._py.Memory
+    pynars.Narsese
+    pynars.NARS.Operation
+    copy
+    deepcopy
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    aware__believe:
+        依赖：pynars.NAL.MentalOperation._aware
+        功能：根据任务的句子和真值，返回一个信念
+    aware__wonder:
+        依赖：pynars.NAL.MentalOperation._aware
+        功能：根据任务的句子，返回一个疑问
+    aware__evaluate:
+        依赖：pynars.NAL.MentalOperation._aware
+        功能：根据任务的句子，返回一个评价
+'''
+
 from typing import List
 import pynars.NAL.MentalOperation._aware as aware
 from pynars.NARS.DataStructures._py.Concept import Concept

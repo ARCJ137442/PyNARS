@@ -1,3 +1,68 @@
+'''
+这个文件包含了NARS的分解规则，包括以下规则：
+    1. <M --> (&, T1, T2)>.  <M --> T1>. |-  <M --> T2>.
+    2. <M --> (|, T1, T2)>.  <M --> T1>. |-  <M --> T2>.
+    3. <M --> (-, T1, T2)>). <M --> T1>. |-  <M --> T2>.
+    4. <M --> (-, T1, T2)>). <M --> T1>. |-  <M --> T2>.
+    5. (--, <(|, T1, T2) --> M>).  <T1 --> M>. |-  (--, <T2 --> M>).
+    6. <(&, T1, T2) --> M>.        (--, <T1 --> M>). |-  (--, <T2 --> M>).
+    7. (--, <(~, T1, T2) --> M>).  <T1 --> M>. |-  <T2 --> M>.
+    8. (--, <(~, T2, T1) --> M>).  (--, <T1 --> M>). |-  (--, <T2 --> M>).
+    9. (&&, T2, T1).        T1. |- T2.
+    10. (||, T1, T2).       T1. |- T2.
+
+【导入模块路径列表】
+    - Copula
+    - Statement
+    - Compound
+    - Connector
+    - Term
+    - Truth
+    - Task
+    - Belief
+    - Budget
+    - Judgement
+    - Goal
+    - Quest
+    - Question
+    - truth_analytic
+    - Functions
+
+【全局变量名称及其作用】
+    - truth_analytic: 用于计算分解规则的分析真值。
+
+【各函数的依赖关系和主要功能】
+    - decomposition_theorem1:
+        依赖：无
+        功能：实现分解规则1——将一个复合语句分解为两个子语句，其中一个是复合语句的谓词，另一个是复合语句的主语。
+    - decomposition_theorem2:
+        依赖：无
+        功能：实现分解规则2——将一个复合语句分解为两个子语句，其中一个是复合语句的主语，另一个是复合语句的谓词。
+    - decomposition_theorem3:
+        依赖：无
+        功能：实现分解规则3——将一个复合语句分解为两个子语句，其中一个是复合语句的主语，另一个是复合语句的谓词的否定。
+    - decomposition_theorem4:
+        依赖：无
+        功能：实现分解规则4——将一个复合语句分解为两个子语句，其中一个是复合语句的谓词的否定，另一个是复合语句的主语的否定。
+    - decomposition_theorem5:
+        依赖：无
+        功能：实现分解规则5——将一个复合语句分解为两个子语句，其中一个是复合语句的主语，另一个是复合语句的谓词的两个子语句的析取的否定。
+    - decomposition_theorem6:
+        依赖：无
+        功能：实现分解规则6——将一个复合语句分解为两个子语句，其中一个是复合语句的主语的两个子语句的合取，另一个是复合语句的谓词。
+    - decomposition_theorem7:
+        依赖：无
+        功能：实现分解规则7——将一个复合语句分解为两个子语句，其中一个是复合语句的主语，另一个是复合语句的谓词的否定的主语。
+    - decomposition_theorem8:
+        依赖：无
+        功能：实现分解规则8——将一个复合语句分解为两个子语句，其中一个是复合语句的谓词的否定的主语，另一个是复合语句的主语的否定。
+    - decomposition_theorem9:
+        依赖：无
+        功能：实现分解规则9——将一个复合语句分解为两个子语句，其中一个是复合语句的两个子语句的合取，另一个是复合语句的其中一个子语句。
+    - decomposition_theorem10:
+        依赖：无
+        功能：实现分解规则10——将一个复合语句分解为两个子语句，其中一个是复合语句的其中一个子语句，另一个是复合语句的另一个子语句的否定。
+'''
 
 from pynars.Narsese import Copula, Statement, Compound, Connector, Term, Truth, Task, Belief, Budget
 from pynars.Narsese import Judgement, Goal, Quest, Question

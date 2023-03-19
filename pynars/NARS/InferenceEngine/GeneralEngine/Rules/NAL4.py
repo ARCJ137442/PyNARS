@@ -1,3 +1,21 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了NAL4推理引擎的规则。本文件中的函数实现了NAL4推理引擎的规则，包括转换规则和组合规则。这些规则是NAL4推理引擎的核心部分，用于推理和推断。本文件中的函数实现了NAL4推理引擎的规则，包括转换规则和组合规则。这些规则是NAL4推理引擎的核心部分，用于推理和推断。
+
+包依赖关系：
+    pynars.NARS.DataStructures
+    sparse_lut
+    pynars.Global
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL4:
+        依赖：Interface_TransformRules._transform__product_to_image, Interface_TransformRules._transform__image_to_product, Interface_TransformRules._transform__image_to_image, Interface_CompositionalRules._structural__bi_composition__0, Interface_CompositionalRules._structural__bi_composition__1, Interface_CompositionalRules._structural__bi_composition__0_prime, Interface_CompositionalRules._structural__bi_composition__1_prime
+        功能：实现NAL4推理引擎的规则，包括转换规则和组合规则。
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from sparse_lut import SparseLUT

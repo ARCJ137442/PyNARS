@@ -1,3 +1,45 @@
+'''
+这个文件实现了一些关于转换的通用函数，包括从积到像、从像到积、从像到像。这些函数的实现与参数略有不同，但是都是通用的。
+
+包依赖关系：
+    pynars.Narsese.Copula
+    pynars.Narsese.Statement
+    pynars.Narsese.Compound
+    pynars.Narsese.Connector
+    pynars.Narsese.Term
+    pynars.Narsese.Judgement
+    pynars.Narsese.Truth
+    pynars.Narsese.Task
+    pynars.Narsese.Belief
+    pynars.Narsese.Budget
+    pynars.Narsese.Stamp
+    pynars.Narsese.Goal
+    pynars.Narsese.Quest
+    pynars.Narsese.Question
+    pynars.Narsese.place_holder
+    pynars.Narsese._py.Sentence
+    ..Functions.TruthValueFunctions
+    ..Functions.DesireValueFunctions
+    ..Functions.StampFunctions
+    ..Functions.BudgetFunctions
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    product_to_image:
+        依赖：无
+        功能：将积转换为像
+
+    image_to_product:
+        依赖：无
+        功能：将像转换为积
+
+    image_to_image:
+        依赖：无
+        功能：将像转换为像
+'''
+
 '''Although there are some theorems about transform between product and image, they are highly specialized, which can only handle some special forms or cases, e.g. `equivalence_theorem13()` in `StructuralRules.py`.
 In this file, some more generalized functions of transform are implemented, though with a little differences in terms of parameters.
 '''
@@ -51,7 +93,23 @@ def product_to_image(task: Task, term_concept: Term, budget_tasklink: Budget=Non
 
 
 def image_to_product(task: Task, term_concept: Term, budget_tasklink: Budget=None, budget_termlink: Budget=None, inverse_premise: bool=False, inverse_copula: bool=False, index=None):
-    ''''''
+    """Created By Cursor.so
+    image_to_product(task, term_concept, budget_tasklink=None, budget_termlink=None, inverse_premise=False, inverse_copula=False, index=None)
+    
+    Transforms a given task into a product of a term and a compound image.
+    
+    Parameters:
+        task (Task): The task to be transformed.
+        term_concept (Term): The term concept.
+        budget_tasklink (Budget): The budget for the tasklink.
+        budget_termlink (Budget): The budget for the termlink.
+        inverse_premise (bool): Whether to inverse the premise.
+        inverse_copula (bool): Whether to inverse the copula.
+        index (int): The index of the compound image.
+    
+    Returns:
+        Task: The transformed task.
+    """
     term_task = task.term
     stat_image: Statement = term_task[index[:-2]] # <a --> (/,R,_,b)>
     compound_image: Compound = stat_image[index[-2]] # (/,R,_,b)
@@ -91,7 +149,23 @@ def image_to_product(task: Task, term_concept: Term, budget_tasklink: Budget=Non
 
 
 def image_to_image(task: Task, term_concept: Term, budget_tasklink: Budget=None, budget_termlink: Budget=None, inverse_premise: bool=False, inverse_copula: bool=False, index=None):
-    ''''''
+    """Created By Cursor.so
+    image_to_image(task, term_concept, budget_tasklink=None, budget_termlink=None, inverse_premise=False, inverse_copula=False, index=None)
+    
+    Transforms a given task by replacing a term in the task's statement with an image of the given term_concept.
+    
+    Parameters:
+        task (Task): The task to be transformed.
+        term_concept (Term): The term to be replaced in the task's statement.
+        budget_tasklink (Budget): The budget of the tasklink.
+        budget_termlink (Budget): The budget of the termlink.
+        inverse_premise (bool): Whether to inverse the premise.
+        inverse_copula (bool): Whether to inverse the copula.
+        index (list): The index of the term to be replaced.
+    
+    Returns:
+        Task: The transformed task.
+    """
     term_task = task.term
     stat_image: Statement = term_task[index[:-2]] # <a --> (/,R,_,b)>
     compound_image: Compound = stat_image[index[-2]] # (/,R,_,b)

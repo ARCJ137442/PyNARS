@@ -1,3 +1,28 @@
+'''
+这个文件是PyNARS中的一个模块，提供了从NARSese语句中提取特征的功能。
+
+包依赖关系：
+    typing.Union
+    collections.namedtuple
+    pynars.Narsese._py.Connector.Connector
+    pynars.Narsese._py.Copula.Copula
+    pynars.NAL.Inference
+    pynars.Narsese.Statement
+    pynars.Narsese.Term
+    pynars.Narsese.Compound
+
+全局变量名称及其作用：
+    Feature: 一个namedtuple，包含了从NARSese语句中提取的特征。
+
+各函数的依赖关系和主要功能：
+    extract_feature:
+        依赖：Union, namedtuple, pynars.Narsese._py.Connector.Connector, pynars.NAL.Inference, pynars.Narsese.Statement, pynars.Narsese.Term, pynars.Narsese.Compound, pynars.Narsese._py.Copula.Copula
+        功能：从两个NARSese语句中提取特征，返回一个Feature对象。
+    _mirorr_feature:
+        依赖：Union, extract_feature
+        功能：从两个NARSese语句中提取特征，返回一个Feature对象，但是交换了两个语句的顺序。
+'''
+
 from typing import Union
 from collections import namedtuple
 

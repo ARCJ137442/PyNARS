@@ -1,3 +1,24 @@
+'''
+这个py文件是pynars.NARS.InferenceEngine.GeneralEngine.Rules.NAL8模块，其中包含了add_rules__NAL8函数，该函数定义了NAL8系统中的规则。该模块依赖于collections.OrderedDict、pynars.NARS.DataStructures.LinkType、pynars.NARS.DataStructures.TaskLink、pynars.NARS.DataStructures.TermLink、pynars.Global、sparse_lut.SparseLUT和....RuleMap.add_rule模块。
+
+包依赖关系：
+    collections.OrderedDict
+    pynars.NARS.DataStructures.LinkType
+    pynars.NARS.DataStructures.TaskLink
+    pynars.NARS.DataStructures.TermLink
+    pynars.Global
+    sparse_lut.SparseLUT
+    ....RuleMap.add_rule
+
+全局变量名称及其作用：
+    无
+
+各函数的依赖关系和主要功能：
+    add_rules__NAL8:
+        依赖：collections.OrderedDict、pynars.NARS.DataStructures.LinkType、pynars.NARS.DataStructures.TaskLink、pynars.NARS.DataStructures.TermLink、pynars.Global、sparse_lut.SparseLUT和....RuleMap.add_rule
+        功能：定义了NAL8系统中的规则
+'''
+
 from collections import OrderedDict
 from pynars.NARS.DataStructures import LinkType, TaskLink, TermLink
 from pynars.Narsese._py import SELF

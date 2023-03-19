@@ -1,3 +1,47 @@
+'''
+ImmediateRules.py
+这个文件包含了一些基本的逻辑规则，如否定、转化和对偶等。这些规则是OpenNARS的基础，用于推理和推导。
+
+## 导入模块路径列表
+- pynars.Narsese._py.Sentence
+- pynars.Narsese.Copula
+- pynars.Narsese.Statement
+- pynars.Narsese.Compound
+- pynars.Narsese.Connector
+- pynars.Narsese.Term
+- pynars.Narsese.Task
+- pynars.Narsese.Budget
+- pynars.Narsese.Stamp
+- pynars.Narsese.Judgement
+- pynars.Narsese.Truth
+- pynars.Narsese.Goal
+- pynars.Narsese.Quest
+- pynars.Narsese.Question
+- pynars.Narsese.F_negation
+- pynars.Narsese.F_conversion
+- pynars.Narsese.F_contraposition
+- pynars.Narsese.fc_to_w_minus
+- pynars.Narsese.fc_to_w_plus
+- pynars.Narsese.w_to_f
+- pynars.Narsese.w_to_c
+- pynars.Narsese.Functions.TruthValueFunctions
+- pynars.Narsese.Functions.BudgetFunctions
+
+## 全局变量名称及其作用
+- 无
+
+## 各函数的依赖关系和主要功能
+- negation
+    - 依赖：Truth_negation, Budget_forward
+    - 主要功能：对一个命题取否定
+- conversion
+    - 依赖：Truth_conversion, Budget_forward
+    - 主要功能：对一个命题进行转化
+- contraposition
+    - 依赖：Truth_contraposition, Budget_forward, Budget_backward_weak_compound
+    - 主要功能：对一个命题进行对偶
+'''
+
 from pynars.Narsese._py.Sentence import Sentence
 from ..Functions.TruthValueFunctions import *
 from pynars.Narsese import Copula, Statement, Compound, Connector, Term, Task, Budget, Stamp

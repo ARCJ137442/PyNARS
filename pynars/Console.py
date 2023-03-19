@@ -1,3 +1,39 @@
+'''
+这是一个NARS的控制台程序，可以通过命令行或文件输入Narsese语句，然后输出推理结果。本程序主要包括以下几个部分：
+
+包依赖关系：
+    - copy: 用于深拷贝对象
+    - typing: 用于类型提示
+    - pathlib: 用于处理文件路径
+    - pynars.Narsese: Narsese语句的解析和生成
+    - pynars.NAL: NAL的实现
+    - pynars.NARS: NARS的实现
+    - time: 用于等待一段时间
+    - multiprocessing: 用于多进程
+    - os: 用于获取进程信息
+    - argparse: 用于解析命令行参数
+
+全局变量名称及其作用：
+    - None
+
+各函数的依赖关系和主要功能：
+    - info:
+        依赖：os
+        功能：输出进程信息
+    - run_line:
+        依赖：pynars.Narsese, pynars.NARS.Reasoner, pynars.utils.Print
+        功能：运行一行Narsese语句
+    - handle_lines:
+        依赖：run_line
+        功能：处理多行Narsese语句
+    - run_file:
+        依赖：handle_lines
+        功能：运行一个Narsese文件
+    - run_nars:
+        依赖：run_file, pynars.NARS.Reasoner, pynars.utils.Print
+        功能：运行NARS控制台程序
+'''
+
 from copy import deepcopy
 from typing import Tuple, Union
 from pathlib import Path

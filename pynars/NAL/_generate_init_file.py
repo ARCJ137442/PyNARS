@@ -1,3 +1,8 @@
+'''
+这个文件是用于生成`pynars.NAL`包中各个子包的`__init__.py`文件的。它会自动扫描子包中的所有模块，将其中的函数导入到子包的`__init__.py`文件中，以便于在使用时可以直接从子包中导入函数。
+'''
+
+
 import os 
 from pathlib import Path
 from inspect import getmembers, isfunction

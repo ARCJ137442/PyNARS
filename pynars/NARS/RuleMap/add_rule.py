@@ -1,3 +1,53 @@
+'''
+这个文件是RuleMap的一个实现，它提供了一个add_rule函数，用于将规则添加到SparseLUT中。SparseLUT是一个稀疏的多维数组，它可以用于高效地存储和查询规则。此外，这个文件还提供了一些辅助函数，用于判断两个Term是否有公共部分，以及判断两个Statement是否有公共Term等。
+
+包依赖关系：
+    numpy
+    pynars.Config
+    pynars.Narsese
+    pynars.Narsese._py
+    pynars.Narsese._py.Connector
+    pynars.Narsese._py.Sentence
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Term
+    pynars.NAL.Inference
+    sparse_lut
+    pynars.utils.tools
+    sty
+
+全局变量名称及其作用：
+    _class_convert: 将Judgement, Goal, Question, Quest转换为数字的字典
+    CommonId: 用于表示两个Term的公共部分
+    add_rule: 将规则添加到SparseLUT中的函数
+    _compound_has_common: 判断两个Term是否有公共部分的函数
+    _compound_at: 判断一个Term是否在一个Compound中的函数
+    _at: 判断一个Term是否在一个Compound中的函数
+    _common: 判断两个Statement是否有公共Term的函数
+
+各函数的依赖关系和主要功能：
+    task_type_id:
+        依赖：Task
+        功能：将Task转换为数字
+    class_sentence_to_list:
+        依赖：无
+        功能：将Judgement, Goal, Question, Quest转换为数字列表
+    _compound_has_common:
+        依赖：Term, Compound, Statement
+        功能：判断两个Term是否有公共部分
+    _compound_at:
+        依赖：Term, Compound, Statement, Connector, _compound_has_common
+        功能：判断一个Term是否在一个Compound中
+    _at:
+        依赖：Compound, Statement, Term
+        功能：判断一个Term是否在一个Compound中
+    _common:
+        依赖：Statement, Statement
+        功能：判断两个Statement是否有公共Term
+    add_rule:
+        依赖：SparseLUT, OrderedDict, List[RuleCallable]
+        功能：将规则添加到SparseLUT中
+'''
+
 from operator import imod
 import os 
 from pathlib import Path

@@ -1,3 +1,37 @@
+'''
+这个文件是PyNARS中的一个模块，它实现了执行任务的功能。该模块提供了两个函数，分别是`executed_task`和`execute`。其中，`executed_task`函数用于执行任务，`execute`函数用于执行任务并将结果添加到概念中。
+
+包依赖关系：
+    pynars.Config
+    pynars.NARS.DataStructures._py.Concept
+    pynars.NARS.DataStructures._py.Memory
+    pynars.Narsese._py.Budget
+    pynars.Narsese._py.Operation
+    pynars.Narsese._py.Sentence
+    pynars.Narsese._py.Statement
+    pynars.Narsese._py.Task
+    pynars.Narsese._py.Truth
+    pynars.NAL.Functions.Tools
+    pynars.Narsese
+    pynars.Global
+    .Register
+
+全局变量名称及其作用：
+    Global.time: 当前时间
+    Config.c_judgement: 判断的置信度
+    Config.k: 时间常数
+    Config.p_feedback: 反馈概率
+    Config.d_feedback: 反馈延迟
+
+各函数的依赖关系和主要功能：
+    executed_task:
+        依赖：Global.get_input_id, Truth, Stamp, Budget, Task
+        功能：执行任务并返回一个新的任务
+    execute:
+        依赖：memory.take_by_key, executed_task, registered_operations
+        功能：执行任务并将结果添加到概念中
+'''
+
 from typing import Callable, List
 from pynars.Config import Config
 from pynars.NARS.DataStructures._py.Concept import Concept

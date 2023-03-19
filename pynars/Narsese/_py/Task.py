@@ -1,3 +1,39 @@
+'''
+这个文件定义了一个名为Task的类，它是Item的子类，表示一个任务。Task类包含了一个Sentence对象，它是Judgement、Goal、Question或Quest的子类，表示一个句子。Task类还包含了一个Budget对象，表示任务的预算。Task类的实例可以通过achieving_level方法计算出它的完成度，通过reduce_budget_by_achieving_level方法减少它的预算。Task类还包含了一些属性和方法，用于判断任务的类型、是否可执行等。
+
+包依赖关系：
+    copy
+    typing
+    .Sentence
+    .Item
+    .Budget
+    .Term
+    .Truth
+
+全局变量名称及其作用：
+    Task.input_id: 任务的输入ID
+
+各函数的依赖关系和主要功能：
+    __init__:
+        依赖：hash, super
+        功能：初始化Task对象
+    achieving_level:
+        依赖：is_judgement, is_goal, is_question
+        功能：计算Task对象的完成度
+    reduce_budget_by_achieving_level:
+        依赖：achieving_level
+        功能：减少Task对象的预算
+    eternalize:
+        依赖：copy
+        功能：将Task对象的Sentence对象永久化
+    __str__:
+        依赖：repr
+        功能：返回Task对象的字符串表示
+    __repr__:
+        依赖：str
+        功能：返回Task对象的字符串表示
+'''
+
 from copy import copy
 from typing import Type, Union
 from .Sentence import Sentence, Judgement, Goal, Quest, Question, Stamp

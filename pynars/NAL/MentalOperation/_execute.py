@@ -1,3 +1,42 @@
+'''
+这个文件包含了一些用于执行NARS语句的函数，包括执行、预测、信任、怀疑、评估、犹豫、想要和想知道等。这些函数都是用于处理NARS语句的，可以用于实现NARS系统的各种功能。
+
+导入模块路径列表：
+- typing.List
+- pynars.Config.Config
+- pynars.Narsese._py.Budget.Budget
+- pynars.Narsese._py.Operation
+- pynars.Narsese._py.Sentence.Goal
+- pynars.Narsese._py.Sentence.Judgement
+- pynars.Narsese._py.Sentence.Quest
+- pynars.Narsese._py.Sentence.Question
+- pynars.Narsese._py.Sentence.Sentence
+- pynars.Narsese._py.Sentence.Stamp
+- pynars.Narsese._py.Statement.Statement
+- pynars.Narsese._py.Task.Belief
+- pynars.Narsese._py.Task.Desire
+- pynars.Narsese._py.Task.Task
+- pynars.Narsese._py.Truth.Truth
+- pynars.Narsese.Term
+- pynars.Narsese.Base
+- pynars.Global
+
+全局变量名称及其作用：
+- Config: 用于配置NARS系统的参数。
+- registered_operations: 用于存储已注册的操作。
+- Global: 用于存储全局变量。
+
+各函数的依赖关系和主要功能：
+- execute: 执行NARS语句。
+- anticipate: 预测NARS语句。
+- believe: 信任NARS语句。
+- doubt: 怀疑NARS语句。
+- evaluate: 评估NARS语句。
+- hesitate: 犹豫NARS语句。
+- want: 想要NARS语句。
+- wonder: 想知道NARS语句。
+'''
+
 from typing import List
 from pynars.Config import Config
 from pynars.Narsese._py.Budget import Budget
