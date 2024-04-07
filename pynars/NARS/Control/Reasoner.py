@@ -1,3 +1,4 @@
+import random
 from os import remove
 from pynars.NAL.Functions.Tools import truth_to_quality
 from pynars.NARS.DataStructures._py.Channel import Channel
@@ -8,7 +9,7 @@ from pynars.NARS.InferenceEngine import TemporalEngine
 from pynars.Narsese._py.Budget import Budget
 from pynars.Narsese._py.Statement import Statement
 from pynars.Narsese._py.Task import Belief
-from ..DataStructures import Bag, Memory, NarseseChannel, Buffer, Task, Concept
+from ..DataStructures import Bag, Memory, NarseseChannel, Buffer, Task, Concept, EventBuffer
 from ..InferenceEngine import GeneralEngine, TemporalEngine, VariableEngine
 from pynars import Config
 from pynars.Config import Enable
@@ -17,20 +18,27 @@ import pynars.NARS.Operation as Operation
 from pynars import Global
 from time import time
 from pynars.NAL.Functions.Tools import project_truth, project
+from ..GlobalEval import GlobalEval
+
+
 
 class Reasoner:
 
-    def __init__(self, n_memory, capacity, config = './config.json', nal_rules={1,2,3,4,5,6,7,8,9}) -> None:
+    def __init__(self, n_memory, capacity, config='./config.json', nal_rules={1, 2, 3, 4, 5, 6, 7, 8, 9}) -> None:
         # print('''Init...''')
         Config.load(config)
 
+        self.global_eval = GlobalEval()
+
         self.inference = GeneralEngine(add_rules=nal_rules)
         self.variable_inference = VariableEngine(add_rules=nal_rules)
-        self.temporal_inference = TemporalEngine(add_rules=nal_rules) # for temporal causal reasoning 
+        self.temporal_inference = TemporalEngine(
+            add_rules=nal_rules)  # for temporal causal reasoning
 
-        self.memory = Memory(n_memory)
+        self.memory = Memory(n_memory, global_eval=self.global_eval)
         self.overall_experience = Buffer(capacity)
         self.internal_experience = Buffer(capacity)
+        self.event_buffer = EventBuffer(3)
         self.narsese_channel = NarseseChannel(capacity)
         self.perception_channel = Channel(capacity)
         self.channels: List[Channel] = [
@@ -41,31 +49,100 @@ class Reasoner:
         self.sequence_buffer = Buffer(capacity)
         self.operations_buffer = Buffer(capacity)
 
+        self.u_top_level_attention = 0.5
+
     def reset(self):
-        ''''''
-        # TODO
+        self.memory.reset()
+        self.overall_experience.reset()
+        self.internal_experience.reset()
+        self.narsese_channel.reset()
+        self.perception_channel.reset()
+        for channel in self.channels:
+            channel.reset()
+
+        self.sequence_buffer.reset()
+        self.operations_buffer.reset()
 
     def cycles(self, n_cycle: int):
+        tasks_all_cycles = []
         for _ in range(n_cycle):
-            self.cycle()
+            tasks_all_cycles.append(self.cycle())
+        return tasks_all_cycles
 
     def input_narsese(self, text, go_cycle: bool = False) -> Tuple[bool, Union[Task, None], Union[Task, None]]:
         success, task, task_overflow = self.narsese_channel.put(text)
-        if go_cycle: 
+        if go_cycle:
             tasks = self.cycle()
             return success, task, task_overflow, tasks
         return success, task, task_overflow
 
     def cycle(self):
-        '''Everything to do by NARS in a single working cycle'''
+        """Everything to do by NARS in a single working cycle"""
         Global.States.reset()
         tasks_derived: List[Task] = []
+
+        judgement_revised, goal_revised, answers_question, answers_quest = None, None, None, None
         task_operation_return, task_executed = None, None
-        # step 1. Take out an Item from `Channels`, and then put it into the `Overall Experience`
+
+        random_number: float = random.random()
+
+        data_structure_accessed_busyness = None
+        if random_number < self.u_top_level_attention:
+            judgement_revised, goal_revised, answers_question, answers_quest = self.observe(
+                tasks_derived)
+            data_structure_accessed_busyness = self.overall_experience.busyness
+        else:
+            self.consider(tasks_derived)
+            data_structure_accessed_busyness = self.memory.busyness
+
+        self.u_top_level_attention = Config.Config.r_top_level_attention_adjust * data_structure_accessed_busyness \
+            + (1 - Config.Config.r_top_level_attention_adjust) * \
+            self.u_top_level_attention
+
+        #   put the derived tasks into the internal-experience.
+        for task_derived in tasks_derived:
+            self.internal_experience.put(task_derived)
+
+        # handle the sense of time
+        Global.time += 1
+        thresh_complexity = 20
+        tasks_derived = [
+            task for task in tasks_derived if task.term.complexity <= thresh_complexity]
+        return tasks_derived, judgement_revised, goal_revised, answers_question, answers_quest, (
+            task_operation_return, task_executed)
+
+    def consider(self, tasks_derived: List[Task]):
+        """
+            Consider a Concept in the Memory
+        """
+        # step 4. Apply inference step
+        #   general inference step
+        concept: Concept = self.memory.take(remove=True)
+        if concept is not None:
+            tasks_inference_derived = self.inference.step(concept)
+            tasks_derived.extend(tasks_inference_derived)
+
+            is_concept_valid = True  # TODO
+            if is_concept_valid:
+                self.memory.put_back(concept)
+
+    def observe(self, tasks_derived: List[Task]):
+        """
+            OBSERVE
+            Process Channels/Buffers
+        """
+        judgement_revised, goal_revised, answers_question, answers_quest = None, None, None, None
+        # step 1. Take out an Item from `Channels`, and then put it into the `Overall Experience` and Event Buffers
         for channel in self.channels:
             task_in: Task = channel.take()
             if task_in is not None:
                 self.overall_experience.put(task_in)
+                if self.event_buffer.can_task_enter(task_in):
+                    self.event_buffer.put(task_in)
+                    # when there's a new event, run the temporal chaining
+                    temporal_results = self.event_buffer.generate_temporal_sentences()
+                    for result in temporal_results:
+                        self.overall_experience.put(result)
 
         # step 2. Take out an Item from the `Internal Experience`, with putting it back afterwards, and then put it
         # into the `Overall Experience`
@@ -80,12 +157,14 @@ class Reasoner:
             task.processed = True
             # if task.is_goal:
             #     print(task)
-            
+
             # concept = self.memory.take_by_key(task.term, remove=False)
             # if task.is_goal:
-                # goal_revised = self.process_goal(task, concept)
-            judgement_revised, goal_revised, answers_question, answers_quest, (task_operation_return, task_executed), _tasks_derived = self.memory.accept(task)
-            if task_operation_return is not None: tasks_derived.append(task_operation_return)
+            # goal_revised = self.process_goal(task, concept)
+            judgement_revised, goal_revised, answers_question, answers_quest, (
+                task_operation_return, task_executed), _tasks_derived = self.memory.accept(task)
+            if task_operation_return is not None:
+                tasks_derived.append(task_operation_return)
             # if task_executed is not None: tasks_derived.append(task_executed)
             tasks_derived.extend(_tasks_derived)
             # self.sequence_buffer.put_back(task) # globalBuffer.putBack(task,
@@ -109,54 +188,59 @@ class Reasoner:
             if answers_quest is not None:
                 for answer in answers_quest:
                     self.internal_experience.put(answer)
+            # update busyness
+            self.global_eval.update_busyness(task.budget.priority)
+
+        """ update alertness
+        Note: 
+            according to [Wang, P., Talanov, M., & Hammer, P. (2016). The emotional mechanisms in NARS. In Artificial General Intelligence: 9th International Conference, AGI 2016, New York, NY, USA, July 16-19, 2016, Proceedings 9 (pp. 150-159). Springer International Publishing.](https://cis.temple.edu/~pwang/Publication/emotion.pdf)
+                > summarizes the average difference between recently processed input and the corresponding anticipations, so as to roughly indicate the extent to which the current environment is familiar.
+            The current code hasn't implemented `EventBuffer` yet.
+            The intuitive meaning of `alertness` is 
+                > the extent to which the system’s knowledge is insufficient
+                (see [The Conceptual Design of OpenNARS 3.1.0](https://cis.temple.edu/tagit/publications/PAGI-TR-11.pdf))
+            We tentatively exploit the truth of a revised task to indicate alertness
+        """
+        if judgement_revised is not None:
+            self.global_eval.update_alertness(
+                judgement_revised.truth.c - task.truth.c)
         else:
-            judgement_revised, goal_revised, answers_question, answers_quest = None, None, None, None
+            self.global_eval.update_alertness(0.0)
+            # TODO: handling temporal induction and mental operation
+            #       Is it implemented correctly?
 
-        # step 4. Apply inference step
-        #   general inference step
-        concept: Concept = self.memory.take(remove=True)
-        if concept is not None:
-            tasks_inference_derived = self.inference.step(concept)
-            tasks_derived.extend(tasks_inference_derived)
-            
-            is_concept_valid = True # TODO
-            if is_concept_valid:
-                self.memory.put_back(concept)
-
-        #   temporal induction in NAL-7
-        if Enable.temporal_reasoning and task is not None and task.is_judgement and task.is_external_event:
-            concept_task: Concept = self.memory.take_by_key(task.term, remove=False)
-            t1 = time()
-            tasks_derived.extend(
-                self.temporal_inference.step(
-                    task, concept_task,
-                    self.sequence_buffer,
-                    self.operations_buffer
+            #   temporal induction in NAL-7
+            if Enable.temporal_reasoning and task is not None and task.is_judgement and task.is_external_event:
+                concept_task: Concept = self.memory.take_by_key(
+                    task.term, remove=False)
+                # t1 = time()
+                tasks_derived.extend(
+                    self.temporal_inference.step(
+                        task, concept_task,
+                        self.sequence_buffer,
+                        self.operations_buffer
+                    )
                 )
-            )
-            t2 = time()
-            print(f"time: {t2-t1}")
-        else:
-            pass  # TODO: select a task from `self.sequence_buffer`?
+                # t2 = time()
+                # print(f"time: {t2-t1}")
+            else:
+                pass  # TODO: select a task from `self.sequence_buffer`?
 
-        #   mental operation of NAL-9
-        if Enable.operation: # it should be `Enable.mental_operation`?
-            task_operation_return, task_executed, belief_awared = self.mental_operation(task, concept, answers_question,
-                                                                                        answers_quest)
-            if task_operation_return is not None: tasks_derived.append(task_operation_return)
-            if task_executed is not None: tasks_derived.append(task_executed)
-            if belief_awared is not None: tasks_derived.append(belief_awared)
+            #   mental operation of NAL-9
+            if Enable.operation:  # it should be `Enable.mental_operation`?
+                # self.memory.
+                concept_task: Concept = self.memory.take_by_key(
+                    task.term, remove=False)
+                task_operation_return, task_executed, belief_awared = self.mental_operation(
+                    task, concept_task, answers_question, answers_quest)
+                if task_operation_return is not None:
+                    tasks_derived.append(task_operation_return)
+                if task_executed is not None:
+                    tasks_derived.append(task_executed)
+                if belief_awared is not None:
+                    tasks_derived.append(belief_awared)
 
-        #   put the derived tasks into the internal-experience.
-        for task_derived in tasks_derived:
-            self.internal_experience.put(task_derived)
-
-        # handle the sense of time
-        Global.time += 1
-        thresh_complexity = 20
-        tasks_derived = [task for task in tasks_derived if task.term.complexity <= thresh_complexity]
-        return tasks_derived, judgement_revised, goal_revised, answers_question, answers_quest, (
-            task_operation_return, task_executed)
+        return judgement_revised, goal_revised, answers_question, answers_quest,
 
     def mental_operation(self, task: Task, concept: Concept, answers_question: Task, answers_quest: Task):
         # handle the mental operations in NAL-9
@@ -164,7 +248,8 @@ class Reasoner:
 
         # belief-awareness
         for answers in (answers_question, answers_quest):
-            if answers is None: continue
+            if answers is None:
+                continue
             for answer in answers:
                 belief_awared = Operation.aware__believe(answer)
 
@@ -178,7 +263,11 @@ class Reasoner:
 
                 # execute mental operation
         if task is not None and task.is_executable:
-            task_operation_return, task_executed = Operation.execute(task, concept, self.memory)
+            task_operation_return, task_executed = Operation.execute(
+                task, concept, self.memory)
+
+            # update well-being
+            self.global_eval.update_wellbeing(task_executed.truth.e)
 
         return task_operation_return, task_executed, belief_awared
 
@@ -190,4 +279,3 @@ class Reasoner:
             Operation.register(op, callback)
             return op
         return None
-
