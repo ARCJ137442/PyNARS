@@ -5,8 +5,6 @@ from typing import Callable, List, Tuple, Type
 from ordered_set import OrderedSet
 from bidict import bidict
 
-from numpy import prod
-
 class IntVar:
     def __init__(self, num: int) -> None:
         self.num = int(num)
@@ -126,7 +124,7 @@ class IndexVar:
         self.positions = [] # the positions of each dependent variable
         self.indices = [] # the dependent variable in each position.
 
-        self.predecessor: IndexVar = None
+        # self.predecessor: IndexVar = None
         self.successors: List[IndexVar] = []
 
         self._is_built = False
@@ -167,7 +165,7 @@ class IndexVar:
     def connect(self, successor: 'IndexVar', generate_pos=False):
         ''''''
         self.successors.append(successor)
-        successor.predecessor = self
+        # successor.predecessor = self
 
         if not generate_pos: return
 

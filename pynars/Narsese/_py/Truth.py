@@ -1,6 +1,5 @@
 from pynars.Config import Config
 from typing import Type
-import numpy as np
 
 class Truth:
     # analytic: Type['Truth']
@@ -30,5 +29,5 @@ class Truth:
     def __repr__(self) -> str:
         return str(self)
 
-truth_analytic = Truth(Config.f, Config.c, Config.k)
+truth_analytic = Truth(1.0, 1.0, Config.k)
     

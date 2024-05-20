@@ -10,7 +10,6 @@ from typing import Iterable, List, Type, Union
 from ordered_set import OrderedSet
 from typing import Set
 from pynars.utils.tools import list_contains
-import numpy as np
 from pynars.Global import States
 
 
@@ -22,6 +21,8 @@ class Compound(Term):  # , OrderedSet):
     def __init__(self, connector: Connector, *terms: Term, is_input=False) -> None:
         ''''''
         self._is_commutative = connector.is_commutative
+        if connector is Connector.Product and len(terms) == 1:
+            terms = [Term('SELF', do_hashing=True)] + list(terms)
         terms = Terms(terms, self._is_commutative)
         # the connector may be changed, for example, (|, {A}, {B}) is changed into {A, B}.
         self.connector, self._terms = self.prepocess_terms(
@@ -78,6 +79,14 @@ class Compound(Term):  # , OrderedSet):
     @property
     def is_higher_order(self):
         return super().is_higher_order
+    
+    @property
+    def is_predictive(self):
+        return self.connector.is_predictive
+    
+    @property
+    def is_concurrent(self):
+        return self.connector.is_concurrent
 
     @property
     def terms(self) -> Terms:  # Union[Set[Term], List[Term]]:
@@ -358,9 +367,13 @@ class Compound(Term):  # , OrderedSet):
                 set2: Iterable[Term] = o.terms - self.terms
                 if len(set1) == len(set2) == 0:
                     return True
-                eq_array = np.array([[term1.equal(term2)
-                                    for term2 in set2] for term1 in set1])
-                if np.prod(eq_array.sum(axis=0)) > 0 and np.prod(eq_array.sum(axis=1)) > 0:
+                # ChatGPT: directly returns the result of the logical AND condition, 
+                # checking if all column sums and all row sums are greater than zero. 
+                # This uses the built-in all() function to ensure every sum in each direction (column and row) 
+                # is greater than zero. The zip(*eq_array) unpacks each row of eq_array into columns.
+                eq_array = [[term1.equal(term2)
+                             for term2 in set2] for term1 in set1]
+                if all(sum(col) > 0 for col in zip(*eq_array)) and all(sum(row) > 0 for row in eq_array):
                     return True
                 else:
                     return False
@@ -530,6 +543,12 @@ class Compound(Term):  # , OrderedSet):
     @classmethod
     def ParallelEvents(cls, *terms: Term, is_input=False) -> Type['Compound']:
         return cls._convert(Compound(Connector.ParallelEvents, *terms, is_input=is_input))
+
+    def concurrent(self):
+        return Compound(self.connector.get_concurent, *self.terms.terms)
+    
+    def predictive(self):
+        return Compound(self.connector.get_predictive, *self.terms.terms)
 
     def clone(self):
         if not self.has_var:
