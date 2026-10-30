@@ -7,3 +7,4 @@ Generated pickle caches, compiled extensions and Python bytecode are excluded.
 The first construction rebuilds rule maps. Before API use, prewarm from vnars/fixture:
 `python -c "from pynars.NARS.Control.Reasoner import Reasoner; Reasoner(100,100)"`.
 Dependency setup and host process ownership live in ARCJ137442/vNARS.
+Provider contract and verification: [vNARS CIN guide](https://github.com/ARCJ137442/vNARS/blob/main/docs/cin-guide.md).
